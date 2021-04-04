@@ -1,0 +1,146 @@
+.main-header {
+  position: relative;
+  height: 80vh;
+  overflow-x: hidden;
+}
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  overflow: hidden;
+  &__content {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; //similar to background_size:cover,obect-fit fills entire parent element
+  }
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3rem;
+  &-logo {
+    height: 3rem;
+    width: 10rem;
+    margin-left: 5rem;
+  }
+  &-nav {
+    transition: all 0.5s;
+    &-item {
+      font-size: 1.7rem;
+      background: none;
+      color: white;
+      border: none;
+      margin-right: 3rem;
+      font-weight: 700;
+      padding: 0.5rem;
+      &-4 {
+        margin-right: 5rem;
+      }
+    }
+  }
+}
+.header-nav-item:hover {
+  border-bottom: 2px solid green;
+}
+.welcome {
+  position: absolute;
+  font-size: 3rem;
+  color: white;
+  top: 20rem;
+  left: 5rem;
+}
+.movieex {
+  position: absolute;
+  font-size: 6rem;
+  color: white;
+  top: 23rem;
+  left: 5rem;
+}
+.confused {
+  color: rgba(255, 255, 255, 0.767);
+  font-size: 2rem;
+  position: absolute;
+  top: 34rem;
+  left: 5rem;
+}
+.millions {
+  color: rgba(255, 255, 255, 0.767);
+  font-size: 2.5rem;
+  position: absolute;
+  top: 37rem;
+  left: 5rem;
+}
+.explore {
+  position: absolute;
+  left: 5rem;
+  top: 45rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  &-now {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-right: 2rem;
+  }
+  &-arrow {
+    font-size: 3rem;
+    margin-right: 2rem;
+    color: green;
+  }
+  &-btn {
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    margin-right: 2rem;
+    border-radius: 5rem;
+    background: rgba(255, 255, 255, 0.719);
+    box-shadow: 3px 4px 9px 0px rgba(255, 255, 255, 0.397);
+    &:hover {
+      box-shadow: 1px 2px 7px 0px rgba(255, 255, 255, 0.397);
+      transform: translateY(0.2rem);
+    }
+  }
+}
+.joker {
+  position: absolute;
+  top: 30rem;
+  right: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &-title {
+    height: 9rem;
+    width: 32rem;
+    opacity: 0.5;
+  }
+  &-dir {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.575);
+    font-weight: 700;
+    letter-spacing: 0.4rem;
+  }
+  &-tagline {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.534);
+    font-weight: 700;
+    letter-spacing: 0.4rem;
+  }
+  &-watchnow {
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.205);
+    font-weight: 700;
+  }
+  &-img {
+    width: 15rem;
+    height: 8rem;
+    margin-top: -1.5rem;
+    margin-left: 2rem;
+  }
+}
