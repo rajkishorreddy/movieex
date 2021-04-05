@@ -1,0 +1,27 @@
+.mvhdr {
+  display: flex;
+  background: #111;
+  align-items: center;
+  justify-content: space-between;
+  &-logo {
+    height: 4rem;
+    width: 12rem;
+    margin-left: 2rem;
+  }
+  &-input {
+    border: none;
+    width: 35rem;
+    margin-right: 7rem;
+    // height: 3rem;
+    padding: 0.8rem 1rem 0.8rem 1rem;
+    font-family: inherit;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    background: rgba(255, 255, 255, 0.185);
+    font-weight: 500;
+    &:focus {
+      width: 40rem;
+      outline: none;
+    }
+  }
+}

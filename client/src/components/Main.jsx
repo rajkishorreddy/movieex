@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./scss/main.scss";
+
 import { connect } from "react-redux";
 import {
   fetchNowPlayingMovies,
@@ -118,16 +120,16 @@ class Main extends React.Component {
         <div className="mvt">
           <div className="mvt-heading">Movies in theatres</div>
           <div className="mvt-container">{this.renderNowPlayingMovies()}</div>
-          <a href="/movies" className="mvt-footer">
+          <Link to="/movies" className="mvt-footer">
             Explore more movies here !
-          </a>
+          </Link>
         </div>
         <div className="mvt">
           <div className="mvt-heading">Top Rated Movies</div>
           <div className="mvt-container">{this.renderTopRatedMovies()}</div>
-          <a href="/movies" className="mvt-footer">
+          <Link to="/movies" className="mvt-footer">
             Explore more movies here !
-          </a>
+          </Link>
         </div>
         <div className="mvt">
           <div className="mvt-heading">Popular TV shows</div>

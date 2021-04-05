@@ -1,6 +1,7 @@
 import React from "react";
+import MovieHeader from "./MovieHeader";
 const MovieMain = () => {
-  return <div>this is movie page</div>;
+  return <MovieHeader />;
 };
 
 export default MovieMain;
