@@ -40,3 +40,11 @@ export const TopRatedTvReducer = (state = [], action) => {
       return state;
   }
 };
+export const TrendingPeopleReducer = (state = [], action) => {
+  switch (action.type) {
+    case "TRENDING_PEOPLE":
+      return [...state, ...action.payload];
+    default:
+      return state;
+  }
+};

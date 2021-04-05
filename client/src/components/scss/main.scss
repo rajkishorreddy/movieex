@@ -21,15 +21,16 @@
     margin-top: 1rem;
   }
   &-footer {
+    z-index: 2;
     text-decoration: none;
     color: #111;
     font-size: 1.6rem;
-    background-color: white;
+    background-color: #bbb;
     position: absolute;
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    padding: 1rem 2rem 1rem 2rem;
+    padding: 0.5rem 2rem 0.5rem 2rem;
     border-radius: 2rem;
     box-shadow: 0.2rem 0.2rem 2rem 0px rgba(238, 238, 238, 0.541);
     &:hover {
@@ -44,6 +45,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
     // margin: 0 2.5rem 0 2.5rem;
     &-rating {
       background: #111;
@@ -56,25 +58,25 @@
       font-size: 1.2rem;
       margin-top: 1rem;
     }
-    &-genre {
-      display: flex;
-      &-item {
-        font-weight: 500;
-        margin: 0.5rem;
-        // background: #ccc;
-        border: 1px solid black;
-        padding: 1px 3px 1px 3px;
-        border-radius: 5px;
-        font-size: 1.2rem;
-      }
-    }
+    // &-genre {
+    //   display: flex;
+    //   &-item {
+    //     font-weight: 500;
+    //     margin: 0.5rem;
+    //     // background: #ccc;
+    //     border: 1px solid black;
+    //     padding: 1px 3px 1px 3px;
+    //     border-radius: 5px;
+    //     font-size: 1.2rem;
+    //   }
+    // }
     &-adult {
       position: absolute;
       right: 3rem;
       top: 2rem;
       font-size: 1.5rem;
       font-weight: 900;
-      background: red;
+      background: rgba(255, 0, 0, 0.836);
       padding: 3px;
       color: white;
       border-radius: 1rem;

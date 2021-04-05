@@ -6,7 +6,30 @@ const topRatedMoviesUrl = `${url}/movie/top_rated`;
 const genreUrl = `${url}/genre/movie/list`;
 const PopularTvUrl = `${url}/tv/popular`;
 const TopRatedTvUrl = `${url}/tv/top_rated`;
-
+const trendingPersons = `${url}/trending/person/week`;
+// const test = async () => {
+//   const { data } = await axios.get(
+//     "https://api.themoviedb.org/3/search/person?api_key=2afbb0d04ed94c81cd8858e0087a74fe&query=emelia"
+//   );
+//   console.log(data);
+// };
+// test();
+export const fetchTrendingPeople = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(trendingPersons, {
+      params: {
+        api_key: apiKey,
+      },
+    });
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      name: obj.name,
+      poster: posterUrl + obj.profile_path,
+    }));
+    dispatch({ type: "TRENDING_PEOPLE", payload: modifiedData });
+  };
+};
 export const fetchNowPlayingMovies = () => {
   return async (dispatch) => {
     const { data } = await axios.get(nowPlayingMovieUrl, {

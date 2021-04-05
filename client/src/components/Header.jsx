@@ -14,8 +14,9 @@ const Header = () => {
           <button className="header-nav-item header-nav-item-2 ">
             TV shows
           </button>
-          <button className="header-nav-item header-nav-item-3">Login</button>
-          <button className="header-nav-item header-nav-item-4 ">Signup</button>
+          <button className="header-nav-item header-nav-item-3">People</button>
+          <button className="header-nav-item header-nav-item-4">Login</button>
+          <button className="header-nav-item header-nav-item-5 ">Signup</button>
         </nav>
       </div>
       <h2 className="welcome">welcome to</h2>

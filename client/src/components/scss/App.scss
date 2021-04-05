@@ -5,6 +5,22 @@
 }
 html {
   font-size: 62.5%;
+  //below 1200px
+  @media only screen and (max-width: 75em) {
+    font-size: 56.25%;
+  }
+  //below 900px
+  @media only screen and (max-width: 56.25em) {
+    font-size: 50%;
+  }
+  //below 600px
+  @media only screen and (max-width: 36.5em) {
+    font-size: 45%;
+  }
+  //above 1800px
+  @media only screen and (min-width: 112.5em) {
+    font-size: 80%;
+  }
 }
 body {
   font-family: "Roboto", sans-serif;

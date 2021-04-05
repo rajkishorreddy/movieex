@@ -5,11 +5,13 @@ import {
   GenreListReducer,
   PopularTvReducer,
   TopRatedTvReducer,
+  TrendingPeopleReducer,
 } from "./fetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
   TopRatedMovies: TopRatedMovieReducer,
   genreList: GenreListReducer,
   PopularTv: PopularTvReducer,
-  topRated: TopRatedTvReducer,
+  topRatedTv: TopRatedTvReducer,
+  trendingPeople: TrendingPeopleReducer,
 });

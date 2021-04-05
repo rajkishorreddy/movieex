@@ -9,15 +9,17 @@ import {
   fetchGenre,
   fetchPopularTv,
   fetchTopRatedTv,
+  fetchTrendingPeople,
 } from "../actions";
 class Main extends React.Component {
   componentDidMount() {
     const fetchapi = async () => {
+      await this.props.fetchGenre();
       await this.props.fetchNowPlayingMovies();
       await this.props.fetchTopRatedMovies();
-      await this.props.fetchGenre();
       await this.props.fetchPopularTv();
       await this.props.fetchTopRatedTv();
+      await this.props.fetchTrendingPeople();
     };
     fetchapi();
   }
@@ -33,11 +35,11 @@ class Main extends React.Component {
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
             </div>
             <div className="mvt-ocard-title">{mv.title}</div>
-            <div className="mvt-ocard-genre">
+            {/* <div className="mvt-ocard-genre">
               <div className="mvt-ocard-genre-item">love</div>
               <div className="mvt-ocard-genre-item">action</div>
               <div className="mvt-ocard-genre-item">thriller</div>
-            </div>
+            </div> */}
             <div className="mvt-ocard-rating">{mv.rating}</div>
             <div className="mvt-ocard-relese">{mv.release}</div>
           </div>
@@ -57,13 +59,29 @@ class Main extends React.Component {
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
             </div>
             <div className="mvt-ocard-title">{mv.title}</div>
-            <div className="mvt-ocard-genre">
+            {/* <div className="mvt-ocard-genre">
               <div className="mvt-ocard-genre-item">love</div>
               <div className="mvt-ocard-genre-item">action</div>
               <div className="mvt-ocard-genre-item">thriller</div>
-            </div>
+            </div> */}
             <div className="mvt-ocard-rating">{mv.rating}</div>
             <div className="mvt-ocard-relese">{mv.release}</div>
+          </div>
+        );
+      });
+    }
+  }
+  renderTrendingPeople() {
+    if (!this.props.trendingPeople) {
+      return <div>Loading...</div>;
+    } else {
+      return this.props.trendingPeople.slice(0, 5).map((mv) => {
+        return (
+          <div className="mvt-ocard" key={mv.id}>
+            <div className="mvt-icard">
+              <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
+            </div>
+            <div className="mvt-ocard-title">{mv.name}</div>
           </div>
         );
       });
@@ -81,11 +99,11 @@ class Main extends React.Component {
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
             </div>
             <div className="mvt-ocard-title">{mv.title}</div>
-            <div className="mvt-ocard-genre">
+            {/* <div className="mvt-ocard-genre">
               <div className="mvt-ocard-genre-item">love</div>
               <div className="mvt-ocard-genre-item">action</div>
               <div className="mvt-ocard-genre-item">thriller</div>
-            </div>
+            </div> */}
             <div className="mvt-ocard-rating">{mv.rating}</div>
             <div className="mvt-ocard-relese">{mv.release}</div>
           </div>
@@ -118,6 +136,13 @@ class Main extends React.Component {
             Explore more TV shows here !
           </a>
         </div>
+        <div className="mvt">
+          <div className="mvt-heading">Trending People this week</div>
+          <div className="mvt-container">{this.renderTrendingPeople()}</div>
+          <a href="/movies" className="mvt-footer">
+            Explore more People here !
+          </a>
+        </div>
         <Footer />
       </div>
     );
@@ -129,7 +154,8 @@ const mapStateToProps = (state) => {
     topRatedMovies: state.TopRatedMovies,
     genreList: state.genreList,
     PopularTv: state.PopularTv,
-    topRated: state.topRated,
+    topRatedTv: state.topRatedTv,
+    trendingPeople: state.trendingPeople,
   };
 };
 export default connect(mapStateToProps, {
@@ -138,4 +164,5 @@ export default connect(mapStateToProps, {
   fetchGenre,
   fetchPopularTv,
   fetchTopRatedTv,
+  fetchTrendingPeople,
 })(Main);
