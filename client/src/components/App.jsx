@@ -10,7 +10,7 @@ const App = () => {
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={Main} />
-          <Route path="/movies" exact component={MovieMain} />
+          <Route path="/movies" component={MovieMain} />
         </Switch>
       </Router>
     </React.Fragment>

@@ -1,0 +1,136 @@
+.slide {
+  height: 65vh;
+  width: 100%;
+  position: relative;
+  &-title {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    font-weight: 900;
+    color: white;
+    background: rgba(0, 0, 0, 0.411);
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 10px;
+  }
+  &-rating {
+    position: absolute;
+    right: 5rem;
+    background: rgba(255, 255, 255, 0.623);
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 5rem;
+    font-size: 3rem;
+    font-weight: 700;
+    top: 1rem;
+  }
+  &-inTheater {
+    position: absolute;
+    left: 5rem;
+    top: 2rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+  &-release {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 500;
+    top: 7rem;
+    left: 5rem;
+  }
+  &-reco {
+    position: absolute;
+    top: 50%;
+    left: 5rem;
+    font-size: 2rem;
+    background: rgb(29, 41, 4);
+    color: white;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 2rem;
+    box-shadow: 2px 2px 16px 3px rgba(0, 0, 0, 0.75);
+    animation: highlite 1s infinite;
+    transition: all 1s;
+  }
+}
+@keyframes highlite {
+  0% {
+    box-shadow: 2px 2px 16px 3px rgba(0, 0, 0, 0.75);
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.015);
+    box-shadow: 2px 2px 16px 7px rgba(0, 0, 0, 0.75);
+  }
+}
+.tprated {
+  background: #111;
+  padding-top: 2rem;
+  &-rating {
+    color: white;
+    font-size: 1.5rem;
+  }
+  &-title {
+    font-size: 3rem;
+    margin: 1rem 0 1rem 2rem;
+    color: rgba(255, 255, 255, 0.801);
+  }
+  &-element {
+    margin: 1rem;
+    transition: all 0.5s;
+    // padding: 0.5rem;
+    // background: white;
+    border-radius: 1rem;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &-img {
+    width: 18rem;
+    border-radius: 1rem;
+  }
+  &-carousel {
+    height: 32rem;
+    position: relative;
+  }
+  &-carouselbox {
+    height: 32rem;
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    transition: all 0.5s;
+  }
+
+  &-switchRight,
+  &-switchLeft {
+    color: white;
+    font-weight: bold;
+    height: 27rem;
+    width: 4rem;
+    line-height: 250px;
+    font-size: 25px;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    font-family: sans-serif;
+    top: 0;
+    z-index: 3;
+    border: none;
+  }
+  &-switchLeft {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 50px 0px 64px 1px rgba(0, 0, 0, 0.8);
+  }
+  &-switchRight {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

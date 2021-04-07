@@ -9,11 +9,23 @@ const TopRatedTvUrl = `${url}/tv/top_rated`;
 const trendingPersons = `${url}/trending/person/week`;
 // const test = async () => {
 //   const { data } = await axios.get(
-//     "https://api.themoviedb.org/3/search/person?api_key=2afbb0d04ed94c81cd8858e0087a74fe&query=emelia"
+//     "https://api.themoviedb.org/3/search/tv?api_key=2afbb0d04ed94c81cd8858e0087a74fe&query=sex education"
 //   );
 //   console.log(data);
 // };
-// test();
+const test = async () => {
+  const { data } = await axios.get(
+    "https://api.themoviedb.org/3/discover/movie",
+    {
+      params: {
+        api_key: apiKey,
+        sort_by: `revenue.desc`,
+      },
+    }
+  );
+  console.log(data);
+};
+test();
 export const fetchTrendingPeople = () => {
   return async (dispatch) => {
     const { data } = await axios.get(trendingPersons, {

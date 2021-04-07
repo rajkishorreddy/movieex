@@ -1,17 +1,25 @@
 export const nowPlayingMovieReducer = (nowplaying = [], action) => {
-  switch (action.type) {
-    case "NOW_PLAYING_MOVIE":
-      return [...nowplaying, ...action.payload];
-    default:
-      return nowplaying;
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "NOW_PLAYING_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
   }
 };
 export const TopRatedMovieReducer = (nowplaying = [], action) => {
-  switch (action.type) {
-    case "TOP_RATED_MOVIE":
-      return [...nowplaying, ...action.payload];
-    default:
-      return nowplaying;
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "TOP_RATED_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
   }
 };
 
