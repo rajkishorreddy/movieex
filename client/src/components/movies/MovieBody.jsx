@@ -1,10 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../scss/movieBody.scss";
-import { fetchNowPlayingMovies, fetchTopRatedMovies } from "../../actions";
+import {
+  fetchNowPlayingMovies,
+  fetchTopRatedMovies,
+  fetchPopularMovies,
+  fetchUpcommingMovies,
+} from "../../actions";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-
+import ListContainer from "./Listcontainer";
 class MovieBody extends React.Component {
   constructor(props) {
     super(props);
@@ -15,36 +20,11 @@ class MovieBody extends React.Component {
       // await this.props.fetchGenre();
       await this.props.fetchNowPlayingMovies();
       await this.props.fetchTopRatedMovies();
-      // await this.props.fetchPopularTv();
-      // await this.props.fetchTopRatedTv();
+      await this.props.fetchPopularMovies();
+      await this.props.fetchUpcommingMovies();
       // await this.props.fetchTrendingPeople();
     };
     fetchapi();
-  }
-  scrollAmount = 0;
-  sliderScrollRight() {
-    if (
-      this.scrollAmount <=
-      this.carouselbox.current.scrollWidth -
-        this.carouselbox.current.clientWidth
-    ) {
-      this.carouselbox.current.scrollTo({
-        top: 0,
-        left: (this.scrollAmount += 500),
-        behavior: "smooth",
-      });
-    }
-  }
-  sliderScrollLeft() {
-    this.carouselbox.current.scrollTo({
-      top: 0,
-      left: (this.scrollAmount -= 500),
-      behavior: "smooth",
-    });
-
-    if (this.scrollAmount < 0) {
-      this.scrollAmount = 0;
-    }
   }
   renderSlider() {
     if (!this.props.nowPlayingMovies) {
@@ -77,7 +57,7 @@ class MovieBody extends React.Component {
     if (!this.props.topRatedMovies) {
       return <div>Loading...</div>;
     }
-    return this.props.topRatedMovies.map((mv) => {
+    this.topRatedmovies = this.props.topRatedMovies.map((mv) => {
       return (
         <div className="tprated-element" key={mv.id}>
           <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
@@ -85,8 +65,26 @@ class MovieBody extends React.Component {
         </div>
       );
     });
+    // return this.popularMovies;
   }
+  renderPopularMovies() {
+    if (!this.props.popularMovies) {
+      return <div>Loading...</div>;
+    }
+    this.popularMovies = this.props.popularMovies.map((mv) => {
+      return (
+        <div className="tprated-element" key={mv.id}>
+          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+          <div className="tprated-rating">{mv.rating}</div>
+        </div>
+      );
+    });
+    // return this.listtocheck;
+  }
+
   render() {
+    this.renderPopularMovies();
+    this.renderTopRatedMovies();
     return (
       <div>
         <div className="slider">
@@ -102,27 +100,9 @@ class MovieBody extends React.Component {
             {this.renderSlider()}
           </Carousel>
         </div>
-        <div className="tprated">
-          <div className="tprated-title">Top rated movies</div>
-          <div className="tprated-carousel">
-            <div ref={this.carouselbox} className="tprated-carouselbox">
-              {this.renderTopRatedMovies()}
-            </div>
+        <ListContainer title={"Popular on movieex"} list={this.popularMovies} />
+        <ListContainer title={"Top rated movies"} list={this.topRatedmovies} />
 
-            <button
-              className="tprated-switchLeft tprated-sliderButton"
-              onClick={() => this.sliderScrollLeft()}
-            >
-              l
-            </button>
-            <button
-              className="tprated-switchRight tprated-sliderButton"
-              onClick={() => this.sliderScrollRight()}
-            >
-              r
-            </button>
-          </div>
-        </div>
         <section className="test"></section>
       </div>
     );
@@ -132,9 +112,13 @@ const mapStateToProps = (state) => {
   return {
     nowPlayingMovies: state.nowPlayingMovies,
     topRatedMovies: state.TopRatedMovies,
+    popularMovies: state.popularMovies,
+    upCommingMovies: state.upCommingMovie,
   };
 };
 export default connect(mapStateToProps, {
   fetchNowPlayingMovies,
   fetchTopRatedMovies,
+  fetchPopularMovies,
+  fetchUpcommingMovies,
 })(MovieBody);

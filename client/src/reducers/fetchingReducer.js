@@ -10,12 +10,37 @@ export const nowPlayingMovieReducer = (nowplaying = [], action) => {
     }
   }
 };
+export const upCommingMovieReducer = (nowplaying = [], action) => {
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "UPCOMMING_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
+  }
+};
+
 export const TopRatedMovieReducer = (nowplaying = [], action) => {
   if (nowplaying.length !== 0) {
     return [...nowplaying];
   } else {
     switch (action.type) {
       case "TOP_RATED_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
+  }
+};
+export const PopularMovieReducer = (nowplaying = [], action) => {
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "POPULAR_MOVIE":
         return [...nowplaying, ...action.payload];
       default:
         return nowplaying;

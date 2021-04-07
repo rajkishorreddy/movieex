@@ -1,0 +1,77 @@
+.tprated {
+  background: #111;
+  padding-top: 2rem;
+  &-left {
+    fill: white;
+    height: 2rem;
+    width: 2rem;
+  }
+  &-right {
+    fill: white;
+    height: 2rem;
+    width: 2rem;
+  }
+  &-rating {
+    color: white;
+    font-size: 1.5rem;
+  }
+  &-title {
+    font-size: 3rem;
+    margin: 1rem 0 1rem 2rem;
+    color: rgba(255, 255, 255, 0.801);
+  }
+  &-element {
+    margin: 1rem;
+    transition: all 0.5s;
+    // padding: 0.5rem;
+    // background: white;
+    border-radius: 1rem;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &-img {
+    width: 18rem;
+    border-radius: 1rem;
+  }
+  &-carousel {
+    height: 32rem;
+    position: relative;
+  }
+  &-carouselbox {
+    height: 32rem;
+    width: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    transition: all 0.5s;
+  }
+
+  &-switchRight,
+  &-switchLeft {
+    height: 29rem;
+    width: 4rem;
+    box-shadow: 42px 2px 56px 0px rgba(0, 0, 0, 1);
+    background: #111;
+    z-index: 3;
+    border: none;
+    outline: none;
+  }
+  &-switchLeft {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 50px 0px 64px 1px rgba(0, 0, 0, 0.8);
+  }
+  &-switchRight {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

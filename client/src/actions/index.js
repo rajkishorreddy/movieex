@@ -3,6 +3,8 @@ const url = "https://api.themoviedb.org/3";
 const apiKey = "2afbb0d04ed94c81cd8858e0087a74fe";
 const nowPlayingMovieUrl = `${url}/movie/now_playing`;
 const topRatedMoviesUrl = `${url}/movie/top_rated`;
+const popularMoviesUrl = `${url}/movie/popular`;
+const upcommingMovieUrl = `${url}/movie/upcoming`;
 const genreUrl = `${url}/genre/movie/list`;
 const PopularTvUrl = `${url}/tv/popular`;
 const TopRatedTvUrl = `${url}/tv/top_rated`;
@@ -23,7 +25,7 @@ const test = async () => {
       },
     }
   );
-  console.log(data);
+  // console.log(data);
 };
 test();
 export const fetchTrendingPeople = () => {
@@ -40,6 +42,57 @@ export const fetchTrendingPeople = () => {
       poster: posterUrl + obj.profile_path,
     }));
     dispatch({ type: "TRENDING_PEOPLE", payload: modifiedData });
+  };
+};
+export const fetchUpcommingMovies = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(popularMoviesUrl, {
+      params: {
+        api_key: apiKey,
+        language: "en_US",
+        page: 1,
+      },
+    });
+    console.log(data);
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "UPCOMMING_MOVIE", payload: modifiedData });
+  };
+};
+export const fetchPopularMovies = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(popularMoviesUrl, {
+      params: {
+        api_key: apiKey,
+        language: "en_US",
+        page: 1,
+      },
+    });
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "POPULAR_MOVIE", payload: modifiedData });
   };
 };
 export const fetchNowPlayingMovies = () => {
