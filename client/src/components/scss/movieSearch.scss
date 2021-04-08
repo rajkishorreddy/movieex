@@ -1,0 +1,24 @@
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-container {
+    background: #111;
+  }
+  &-input {
+    font-size: 2rem;
+    height: 4rem;
+    width: 50%;
+    padding: 2rem;
+    border-radius: 5rem;
+    outline: none;
+    border: none;
+    transition: all 0.5s;
+    background: rgba(255, 255, 255, 0.267);
+    &:focus {
+      outline: none;
+      width: 60%;
+    }
+  }
+}

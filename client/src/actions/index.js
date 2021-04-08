@@ -72,7 +72,6 @@ export const fetchSearchedMovies = (mvname) => {
       rating: obj.vote_average,
       rating_count: obj.vote_count,
     }));
-    console.log(modifiedData);
     dispatch({ type: "SEARCHED_MOVIE", payload: modifiedData });
   };
 };

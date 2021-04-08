@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MovieSearch from "./MovieSearch";
 import MovieGenre from "./MovieGenre";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
@@ -7,10 +7,8 @@ import sprite from "../../assets/sprite.svg";
 import logo from "../../assets/logoname.png";
 import { Link } from "react-router-dom";
 import "../scss/moviehdr.scss";
-import history from "../../history";
 const MovieMain = () => {
   let { path } = useRouteMatch();
-
   return (
     <div>
       <div className="mvhdr">
@@ -21,17 +19,22 @@ const MovieMain = () => {
           <Link to="/movies/genre" className="mvhdr-genrelink">
             search by genre
           </Link>
-          <form className="mvhdr-form">
+          <Link to="/movies/search" className="mvhdr-searchmv">
+            Search for a movie
+          </Link>
+          {/* <form onSubmit={onSubmit} className="mvhdr-form">
             <input
               className="mvhdr-input"
               type="text"
               placeholder="search for a movie ..."
+              value={term}
+              onChange={(e) => setTerm(e.target.value)}
             />
-          </form>
+          </form> */}
         </div>
       </div>
       <Switch>
-        <Route path={`${path}/search/:mvName`} component={MovieSearch} />
+        <Route path={`${path}/search`} component={MovieSearch} />
         <Route path={`${path}/genre`} component={MovieGenre} />
         <Route path={`${path}/`} component={MovieBody} />
       </Switch>
