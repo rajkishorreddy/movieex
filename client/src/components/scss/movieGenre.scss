@@ -1,0 +1,69 @@
+.genre {
+  background: #111;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  position: relative;
+  &-link {
+    text-decoration: none;
+    color: green;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-left: 1rem;
+  }
+  &-menu {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    right: 3rem;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+  &-selected {
+    border-top: 1px solid green;
+    border-left: 1px solid green;
+    border-right: 1px solid green;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  &-test {
+    height: 65vh;
+    background: #111;
+    width: 100%;
+  }
+  &-container {
+    background: #111;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 1rem;
+  }
+  &-title {
+    color: rgba(255, 255, 255, 0.801);
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
+  &-list {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &-item {
+      border: none;
+      padding: 0.5rem 1rem 0.5rem 1rem;
+      margin: 0 0.5rem 0.5rem 0.5rem;
+      border-radius: 2rem;
+      border: 1px solid green;
+      background: transparent;
+      color: green;
+      font-size: 1.5rem;
+      outline: none;
+      &:active,
+      &:focus {
+        background: green;
+        color: white;
+      }
+    }
+  }
+}

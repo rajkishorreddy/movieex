@@ -10,6 +10,30 @@ export const nowPlayingMovieReducer = (nowplaying = [], action) => {
     }
   }
 };
+export const TrendingMovieReducer = (nowplaying = [], action) => {
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "TRENDING_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
+  }
+};
+export const boxOfficeMovieReducer = (nowplaying = [], action) => {
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "BOXOFFICE_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
+  }
+};
 export const upCommingMovieReducer = (nowplaying = [], action) => {
   if (nowplaying.length !== 0) {
     return [...nowplaying];
@@ -35,6 +59,15 @@ export const TopRatedMovieReducer = (nowplaying = [], action) => {
     }
   }
 };
+export const GenreMovieReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "GENRE_MOVIE":
+      return [...action.payload];
+    default:
+      return nowplaying;
+  }
+};
+
 export const PopularMovieReducer = (nowplaying = [], action) => {
   if (nowplaying.length !== 0) {
     return [...nowplaying];
@@ -49,6 +82,7 @@ export const PopularMovieReducer = (nowplaying = [], action) => {
 };
 
 export const GenreListReducer = (state = [], action) => {
+  if (state.length !== 0) return [...state];
   switch (action.type) {
     case "GENRE_LIST":
       return [...state, ...action.payload];

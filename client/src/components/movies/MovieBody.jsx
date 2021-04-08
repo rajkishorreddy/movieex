@@ -6,6 +6,8 @@ import {
   fetchTopRatedMovies,
   fetchPopularMovies,
   fetchUpcommingMovies,
+  fetchBoxOfficeMovies,
+  fetchTrendingMovies,
 } from "../../actions";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
@@ -22,6 +24,8 @@ class MovieBody extends React.Component {
       await this.props.fetchTopRatedMovies();
       await this.props.fetchPopularMovies();
       await this.props.fetchUpcommingMovies();
+      await this.props.fetchBoxOfficeMovies();
+      await this.props.fetchTrendingMovies();
       // await this.props.fetchTrendingPeople();
     };
     fetchapi();
@@ -67,6 +71,20 @@ class MovieBody extends React.Component {
     });
     // return this.popularMovies;
   }
+  renderTrendingMovies() {
+    if (!this.props.trendingMovies) {
+      return <div>Loading...</div>;
+    }
+    this.trendingMovies = this.props.trendingMovies.map((mv) => {
+      return (
+        <div className="tprated-element" key={mv.id}>
+          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+          <div className="tprated-rating">{mv.rating}</div>
+        </div>
+      );
+    });
+    // return this.popularMovies;
+  }
   renderPopularMovies() {
     if (!this.props.popularMovies) {
       return <div>Loading...</div>;
@@ -82,9 +100,38 @@ class MovieBody extends React.Component {
     // return this.listtocheck;
   }
 
+  renderBoxOfficeMovies() {
+    if (!this.props.boxOfficeMovies) {
+      return <div>Loading...</div>;
+    }
+    this.boxOfficeMovies = this.props.boxOfficeMovies.map((mv) => {
+      return (
+        <div className="tprated-element" key={mv.id}>
+          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+          <div className="tprated-rating">{mv.rating}</div>
+        </div>
+      );
+    });
+  }
+  renderUpCommingMovies() {
+    if (!this.props.upCommingMovies) {
+      return <div>Loading...</div>;
+    }
+    this.upCommingMovies = this.props.upCommingMovies.reverse().map((mv) => {
+      return (
+        <div className="tprated-element" key={mv.id}>
+          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+          <div className="tprated-rating">{mv.rating}</div>
+        </div>
+      );
+    });
+  }
   render() {
     this.renderPopularMovies();
     this.renderTopRatedMovies();
+    this.renderBoxOfficeMovies();
+    this.renderUpCommingMovies();
+    this.renderTrendingMovies();
     return (
       <div>
         <div className="slider">
@@ -101,9 +148,20 @@ class MovieBody extends React.Component {
           </Carousel>
         </div>
         <ListContainer title={"Popular on movieex"} list={this.popularMovies} />
+        <ListContainer
+          title={"All-Time Box-Office Hits"}
+          list={this.boxOfficeMovies}
+        />
         <ListContainer title={"Top rated movies"} list={this.topRatedmovies} />
-
-        <section className="test"></section>
+        <ListContainer title={"Upcoming films "} list={this.upCommingMovies} />
+        <ListContainer
+          title={"Trending this week "}
+          list={this.trendingMovies}
+        />
+        <div className="quote">
+          “The more successful the villain, the more successful the film.”{" "}
+          <span className="quote-small">– Alfred Hitchcock</span>
+        </div>
       </div>
     );
   }
@@ -114,6 +172,8 @@ const mapStateToProps = (state) => {
     topRatedMovies: state.TopRatedMovies,
     popularMovies: state.popularMovies,
     upCommingMovies: state.upCommingMovie,
+    boxOfficeMovies: state.boxOfficeMovie,
+    trendingMovies: state.trendingMovie,
   };
 };
 export default connect(mapStateToProps, {
@@ -121,4 +181,6 @@ export default connect(mapStateToProps, {
   fetchTopRatedMovies,
   fetchPopularMovies,
   fetchUpcommingMovies,
+  fetchBoxOfficeMovies,
+  fetchTrendingMovies,
 })(MovieBody);

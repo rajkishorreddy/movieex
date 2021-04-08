@@ -8,6 +8,7 @@ const upcommingMovieUrl = `${url}/movie/upcoming`;
 const genreUrl = `${url}/genre/movie/list`;
 const PopularTvUrl = `${url}/tv/popular`;
 const TopRatedTvUrl = `${url}/tv/top_rated`;
+const trendingMovieUrl = `${url}/trending/movie/week`;
 const trendingPersons = `${url}/trending/person/week`;
 // const test = async () => {
 //   const { data } = await axios.get(
@@ -15,19 +16,20 @@ const trendingPersons = `${url}/trending/person/week`;
 //   );
 //   console.log(data);
 // };
-const test = async () => {
-  const { data } = await axios.get(
-    "https://api.themoviedb.org/3/discover/movie",
-    {
-      params: {
-        api_key: apiKey,
-        sort_by: `revenue.desc`,
-      },
-    }
-  );
-  // console.log(data);
-};
-test();
+// const test = async () => {
+//   const { data } = await axios.get(
+//     "https://api.themoviedb.org/3/discover/movie",
+//     {
+//       params: {
+//         api_key: apiKey,
+//         page: 1,
+//         with_genres: 27,
+//       },
+//     }
+//   );
+//   console.log(data);
+// };
+// test();
 export const fetchTrendingPeople = () => {
   return async (dispatch) => {
     const { data } = await axios.get(trendingPersons, {
@@ -44,16 +46,99 @@ export const fetchTrendingPeople = () => {
     dispatch({ type: "TRENDING_PEOPLE", payload: modifiedData });
   };
 };
+export const fetchMoviesByGenre = (genreID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/discover/movie",
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+          page: 1,
+          with_genres: genreID,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "GENRE_MOVIE", payload: modifiedData });
+  };
+};
+export const fetchTrendingMovies = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(trendingMovieUrl, {
+      params: {
+        api_key: apiKey,
+        sort_by: `revenue.desc`,
+        language: "en_US",
+        page: 1,
+      },
+    });
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "TRENDING_MOVIE", payload: modifiedData });
+  };
+};
+export const fetchBoxOfficeMovies = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/discover/movie`,
+      {
+        params: {
+          api_key: apiKey,
+          sort_by: `revenue.desc`,
+          language: "en_US",
+          page: 1,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "BOXOFFICE_MOVIE", payload: modifiedData });
+  };
+};
 export const fetchUpcommingMovies = () => {
   return async (dispatch) => {
-    const { data } = await axios.get(popularMoviesUrl, {
+    const { data } = await axios.get(upcommingMovieUrl, {
       params: {
         api_key: apiKey,
         language: "en_US",
         page: 1,
       },
     });
-    console.log(data);
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
       adult: obj.adult,

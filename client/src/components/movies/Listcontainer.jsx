@@ -1,9 +1,22 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import sprite from "../../assets/sprite.svg";
 import "../scss/listContainer.scss";
 const ListContainer = (props) => {
   const carouselbox = useRef(null);
   let scrollAmount = 0;
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleResize = (e) => {
+    setWindowWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.addEventListener("resize", handleResize);
+    };
+  }, []);
+
   const sliderScrollRight = () => {
     if (
       scrollAmount <=
@@ -11,7 +24,7 @@ const ListContainer = (props) => {
     ) {
       carouselbox.current.scrollTo({
         top: 0,
-        left: (scrollAmount += 500),
+        left: (scrollAmount += windowWidth / 3),
         behavior: "smooth",
       });
     }
@@ -19,7 +32,7 @@ const ListContainer = (props) => {
   const sliderScrollLeft = () => {
     carouselbox.current.scrollTo({
       top: 0,
-      left: (scrollAmount -= 500),
+      left: (scrollAmount -= windowWidth / 3),
       behavior: "smooth",
     });
 
