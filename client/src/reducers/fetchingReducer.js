@@ -59,6 +59,18 @@ export const TopRatedMovieReducer = (nowplaying = [], action) => {
     }
   }
 };
+export const SearchedMovieReducer = (nowplaying = [], action) => {
+  if (nowplaying.length !== 0) {
+    return [...nowplaying];
+  } else {
+    switch (action.type) {
+      case "SEARCHED_MOVIE":
+        return [...nowplaying, ...action.payload];
+      default:
+        return nowplaying;
+    }
+  }
+};
 export const GenreMovieReducer = (nowplaying = [], action) => {
   switch (action.type) {
     case "GENRE_MOVIE":

@@ -11,6 +11,7 @@ import {
   boxOfficeMovieReducer,
   TrendingMovieReducer,
   GenreMovieReducer,
+  SearchedMovieReducer,
 } from "./fetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -24,4 +25,5 @@ export default combineReducers({
   trendingPeople: TrendingPeopleReducer,
   upCommingMovie: upCommingMovieReducer,
   genreMovies: GenreMovieReducer,
+  searchedMovies: SearchedMovieReducer,
 });

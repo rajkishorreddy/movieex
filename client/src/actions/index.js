@@ -18,12 +18,12 @@ const trendingPersons = `${url}/trending/person/week`;
 // };
 // const test = async () => {
 //   const { data } = await axios.get(
-//     "https://api.themoviedb.org/3/discover/movie",
+//     "https://api.themoviedb.org/3/search/movie",
 //     {
 //       params: {
 //         api_key: apiKey,
 //         page: 1,
-//         with_genres: 27,
+//         query: "the dark knight",
 //       },
 //     }
 //   );
@@ -46,7 +46,37 @@ export const fetchTrendingPeople = () => {
     dispatch({ type: "TRENDING_PEOPLE", payload: modifiedData });
   };
 };
-export const fetchMoviesByGenre = (genreID) => {
+export const fetchSearchedMovies = (mvname) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/search/movie",
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+          query: mvname,
+          page: 1,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    console.log(modifiedData);
+    dispatch({ type: "SEARCHED_MOVIE", payload: modifiedData });
+  };
+};
+export const fetchMoviesByGenre = (genreID, page) => {
   return async (dispatch) => {
     const { data } = await axios.get(
       "https://api.themoviedb.org/3/discover/movie",
@@ -54,7 +84,7 @@ export const fetchMoviesByGenre = (genreID) => {
         params: {
           api_key: apiKey,
           language: "en_US",
-          page: 1,
+          page: page,
           with_genres: genreID,
         },
       }
@@ -139,6 +169,7 @@ export const fetchUpcommingMovies = () => {
         page: 1,
       },
     });
+
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
       adult: obj.adult,

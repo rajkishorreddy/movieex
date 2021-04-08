@@ -29,6 +29,22 @@
     height: 65vh;
     background: #111;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-quote {
+      width: 50%;
+      color: #ddd;
+      font-size: 3rem;
+      line-height: 1.6;
+      position: relative;
+      &-small {
+        position: absolute;
+        right: 0;
+        display: block;
+        font-size: 1.2rem;
+      }
+    }
   }
   &-container {
     background: #111;
@@ -37,6 +53,50 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding-top: 1rem;
+    position: relative;
+
+    &-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 2rem 2rem 0 0.5rem;
+      transition: all 0.5s;
+      &-item {
+        fill: white;
+        height: 4rem;
+        width: 4rem;
+        margin-left: 1rem;
+        &:active,
+        &:focus {
+          fill: green;
+        }
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+    &-left {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 2rem 2rem 0 2rem;
+      transition: all 0.5s;
+      &-item {
+        fill: white;
+        height: 4rem;
+        width: 4rem;
+        &:hover {
+          transform: scale(1.2);
+        }
+        &:active,
+        &:focus {
+          fill: green;
+        }
+      }
+    }
   }
   &-title {
     color: rgba(255, 255, 255, 0.801);
