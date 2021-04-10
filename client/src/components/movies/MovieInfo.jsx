@@ -8,12 +8,15 @@ import {
   fetchMovieBuy,
   fetchMovieFlatrate,
   fetchMovieRent,
+  fetchSimilarMovies,
+  fetchRecomendedMovies,
 } from "../../actions";
 import { connect } from "react-redux";
 import "../scss/movieInfo.scss";
 import sprite from "../../assets/sprite.svg";
 import ListContainer from "./Listcontainer";
 import repimg from "../../assets/repimg.png";
+import { Link } from "react-router-dom";
 class MovieInfo extends React.Component {
   componentDidMount() {
     const fetchapi = async () => {
@@ -25,8 +28,12 @@ class MovieInfo extends React.Component {
       await this.props.fetchMovieBuy(this.props.match.params.id);
       await this.props.fetchMovieFlatrate(this.props.match.params.id);
       await this.props.fetchMovieRent(this.props.match.params.id);
+      await this.props.fetchRecomendedMovies(this.props.match.params.id);
+      await this.props.fetchSimilarMovies(this.props.match.params.id);
     };
     fetchapi();
+
+    console.log(this.props.match.params.id);
   }
   renderGenre() {
     if (!this.props.movieDetails) return null;
@@ -155,11 +162,51 @@ class MovieInfo extends React.Component {
       });
     }
   }
-  renderBody() {
-    if (!this.props.movieDetails) return <div>Loading...</div>;
+  renderRecomendedMovies() {
+    if (!this.props.recomendedMovies) {
+      return <div>Loading...</div>;
+    }
     if (this.props.movieDetails.id !== Number(this.props.match.params.id))
       return <div>fetching</div>;
     else {
+      this.recomendedMovies = this.props.recomendedMovies.map((mv) => {
+        return (
+          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+            <div className="tprated-element">
+              <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+              <div className="tprated-rating">{mv.rating}</div>
+            </div>
+          </Link>
+        );
+      });
+    }
+  }
+  renderSimilarMovies() {
+    if (!this.props.similarMovie) {
+      return <div>Loading...</div>;
+    }
+    if (this.props.movieDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      this.similarMovie = this.props.similarMovie.map((mv) => {
+        return (
+          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+            <div className="tprated-element">
+              <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+              <div className="tprated-rating">{mv.rating}</div>
+            </div>
+          </Link>
+        );
+      });
+    }
+  }
+
+  renderBody() {
+    if (!this.props.movieDetails) return <div>Loading...</div>;
+    if (this.props.movieDetails.id !== Number(this.props.match.params.id)) {
+      console.log("int the body", this.props.match.params.id);
+      return <div>fetching</div>;
+    } else {
       const mv = this.props.movieDetails;
       return (
         <div>
@@ -243,7 +290,7 @@ class MovieInfo extends React.Component {
               {this.renderrent()}
             </div>
             <div className="wp-buy">
-              <h5 className="wp-buy-title">Faltrate</h5>
+              <h5 className="wp-buy-title">Streaming</h5>
               {this.renderflat()}
             </div>
             <div className="wp-buy">
@@ -254,18 +301,29 @@ class MovieInfo extends React.Component {
           <ListContainer title={"CAST"} list={this.castList} />
           <ListContainer title={"CREW"} list={this.crewList} />
           <ListContainer title={"Reviews"} list={this.reviewList} />
+          <ListContainer title={"Similar Movies"} list={this.similarMovie} />
+          <ListContainer
+            title={"Recomended Movies"}
+            list={this.recomendedMovies}
+          />
         </div>
       );
     }
   }
+
   render() {
     this.renderCast();
     this.renderCrew();
     this.renderReviews();
+    this.renderRecomendedMovies();
+    this.renderSimilarMovies();
     return (
       <React.Fragment>
         {this.renderBody()}
-        <div className="test"></div>
+        <div className="quote">
+          “It's not what a movie is about, it's how it is about it.”{" "}
+          <span className="quote-small">― Roger Ebert</span>
+        </div>
       </React.Fragment>
     );
   }
@@ -280,6 +338,8 @@ const mapStateToProps = (state) => {
     buyat: state.movieBuy,
     flatat: state.movieFlat,
     rentat: state.movieRent,
+    similarMovie: state.similarMovie,
+    recomendedMovies: state.recomendedMovies,
   };
 };
 export default connect(mapStateToProps, {
@@ -291,4 +351,6 @@ export default connect(mapStateToProps, {
   fetchMovieBuy,
   fetchMovieRent,
   fetchMovieFlatrate,
+  fetchSimilarMovies,
+  fetchRecomendedMovies,
 })(MovieInfo);

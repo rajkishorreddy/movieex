@@ -35,7 +35,12 @@ const MovieMain = () => {
         </div>
       </div>
       <Switch>
-        <Route path={`${path}/info/:id`} component={MovieInfo} />
+        <Route
+          path={`${path}/info/:id`}
+          render={(props) => (
+            <MovieInfo key={props.match.params.id} {...props} />
+          )}
+        />
         <Route path={`${path}/search`} component={MovieSearch} />
         <Route path={`${path}/genre`} component={MovieGenre} />
         <Route path={`${path}/`} component={MovieBody} />

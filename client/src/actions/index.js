@@ -17,18 +17,72 @@ const trendingPersons = `${url}/trending/person/week`;
 //   );
 //   console.log(data);
 // };
-// const test = async () => {
-//   const { data } = await axios.get(
-//     `https://api.themoviedb.org/3/movie/399566/watch/providers`,
-//     {
-//       params: {
-//         api_key: apiKey,
-//       },
-//     }
-//   );
-//   console.log(data.results.US);
-// };
-// test();
+const test = async () => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/399566/recommendations`,
+    {
+      params: {
+        api_key: apiKey,
+      },
+    }
+  );
+  console.log(data.results);
+};
+test();
+export const fetchRecomendedMovies = (ID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${ID}/recommendations`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "RECOMENDED_MOVIE", payload: modifiedData });
+  };
+};
+export const fetchSimilarMovies = (ID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${ID}/similar`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      adult: obj.adult,
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.title,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.release_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "SIMILAR_MOVIE", payload: modifiedData });
+  };
+};
 export const fetchMovieRent = (id) => {
   return async (dispatch) => {
     const { data } = await axios.get(
@@ -40,13 +94,13 @@ export const fetchMovieRent = (id) => {
       }
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
-    let modData = data.results.US.rent?.map((el) => ({
+    let modData = data.results.US?.rent?.map((el) => ({
       id: el.provider_id,
       logo: posterUrl + el.logo_path,
       name: el.provider_name,
     }));
     if (!modData) modData = [];
-    console.log(modData);
+
     dispatch({ type: "MOVIE_RENT", payload: modData });
   };
 };
@@ -61,13 +115,13 @@ export const fetchMovieFlatrate = (id) => {
       }
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
-    let modData = data.results.US.flatrate?.map((el) => ({
+    let modData = data.results.US?.flatrate?.map((el) => ({
       id: el.provider_id,
       logo: posterUrl + el.logo_path,
       name: el.provider_name,
     }));
     if (!modData) modData = [];
-    console.log(modData);
+
     dispatch({ type: "MOVIE_FLAT", payload: modData });
   };
 };
@@ -82,13 +136,13 @@ export const fetchMovieBuy = (id) => {
       }
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
-    let modData = data.results.US.buy?.map((el) => ({
+    let modData = data.results.US?.buy?.map((el) => ({
       id: el.provider_id,
       logo: posterUrl + el.logo_path,
       name: el.provider_name,
     }));
     if (!modData) modData = [];
-    console.log(modData);
+
     dispatch({ type: "MOVIE_BUY", payload: modData });
   };
 };
@@ -107,7 +161,6 @@ export const fetchMovieReviews = (id) => {
       content: el.content,
       name: el.author,
     }));
-    console.log(modData);
     dispatch({ type: "MOVIE_REVIEW", payload: modData });
   };
 };
@@ -311,6 +364,7 @@ export const fetchFullMovieDetails = (movie_id) => {
       rating: data.vote_average,
       rating_count: data.vote_count,
     };
+
     dispatch({ type: "FULL_MOVIE", payload: modData });
   };
 };

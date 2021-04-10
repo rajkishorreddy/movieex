@@ -64,7 +64,7 @@ export const SearchedMovieReducer = (nowplaying = [], action) => {
     case "SEARCHED_MOVIE":
       return [...action.payload];
     default:
-      return nowplaying;
+      return [...nowplaying];
   }
 };
 export const MovieRentReducer = (nowplaying = [], action) => {
@@ -72,7 +72,7 @@ export const MovieRentReducer = (nowplaying = [], action) => {
     case "MOVIE_RENT":
       return [...action.payload];
     default:
-      return nowplaying;
+      return [...nowplaying];
   }
 };
 export const MovieFlatReducer = (nowplaying = [], action) => {
@@ -80,7 +80,7 @@ export const MovieFlatReducer = (nowplaying = [], action) => {
     case "MOVIE_FLAT":
       return [...action.payload];
     default:
-      return nowplaying;
+      return [...nowplaying];
   }
 };
 export const MovieBuyReducer = (nowplaying = [], action) => {
@@ -88,7 +88,23 @@ export const MovieBuyReducer = (nowplaying = [], action) => {
     case "MOVIE_BUY":
       return [...action.payload];
     default:
-      return nowplaying;
+      return [...nowplaying];
+  }
+};
+export const SimilarMovieReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "SIMILAR_MOVIE":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+export const RecomendedMovieReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "RECOMENDED_MOVIE":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
   }
 };
 export const GenreMovieReducer = (nowplaying = [], action) => {
@@ -96,7 +112,7 @@ export const GenreMovieReducer = (nowplaying = [], action) => {
     case "GENRE_MOVIE":
       return [...action.payload];
     default:
-      return nowplaying;
+      return [...nowplaying];
   }
 };
 export const FullMovieReducer = (nowplaying = {}, action) => {
