@@ -32,7 +32,7 @@ class Main extends React.Component {
       return this.props.nowPlayingMovies.slice(0, 5).map((mv) => {
         return (
           <div className="mvt-ocard" key={mv.id}>
-            <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div>
+            {/* <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div> */}
             <div className="mvt-icard">
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
             </div>
@@ -56,7 +56,7 @@ class Main extends React.Component {
       return this.props.topRatedMovies.slice(0, 5).map((mv) => {
         return (
           <div className="mvt-ocard" key={mv.id}>
-            <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div>
+            {/* <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div> */}
             <div className="mvt-icard">
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
             </div>

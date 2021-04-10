@@ -9,6 +9,7 @@ const genreUrl = `${url}/genre/movie/list`;
 const PopularTvUrl = `${url}/tv/popular`;
 const TopRatedTvUrl = `${url}/tv/top_rated`;
 const trendingMovieUrl = `${url}/trending/movie/week`;
+
 const trendingPersons = `${url}/trending/person/week`;
 // const test = async () => {
 //   const { data } = await axios.get(
@@ -16,20 +17,96 @@ const trendingPersons = `${url}/trending/person/week`;
 //   );
 //   console.log(data);
 // };
-// const test = async () => {
-//   const { data } = await axios.get(
-//     "https://api.themoviedb.org/3/search/movie",
-//     {
-//       params: {
-//         api_key: apiKey,
-//         page: 1,
-//         query: "the dark knight",
-//       },
-//     }
-//   );
-//   console.log(data);
-// };
-// test();
+const test = async () => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/299534/reviews`,
+    {
+      params: {
+        api_key: apiKey,
+      },
+    }
+  );
+  console.log(data);
+};
+test();
+export const fetchMovieReviews = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/reviews`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const modData = data.results.map((el) => ({
+      id: el.id,
+      content: el.content,
+      name: el.author,
+    }));
+    console.log(modData);
+    dispatch({ type: "MOVIE_REVIEW", payload: modData });
+  };
+};
+export const fetchMovieCast = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/credits`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = data.cast.slice(0, 40).map((el) => ({
+      cast_id: el.cast_id,
+      character: el.character,
+      id: el.id,
+      credit_id: el.credit_id,
+      name: el.name,
+      profileimg: posterUrl + el.profile_path,
+    }));
+
+    dispatch({ type: "MOVIE_CAST", payload: modData });
+  };
+};
+export const fetchMovieCrew = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/credits`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = data.crew.slice(0, 40).map((el) => ({
+      department: el.department,
+      job: el.job,
+      id: el.id,
+      name: el.name,
+      credit_id: el.credit_id,
+      profileimg: posterUrl + el.profile_path,
+    }));
+
+    dispatch({ type: "MOVIE_CREW", payload: modData });
+  };
+};
+export const fetchMovieExternalIds = (movie_id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movie_id}/external_ids`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    dispatch({ type: "MOVIE_EXTIDS", payload: data });
+  };
+};
 export const fetchTrendingPeople = () => {
   return async (dispatch) => {
     const { data } = await axios.get(trendingPersons, {
@@ -59,6 +136,14 @@ export const fetchSearchedMovies = (mvname) => {
         },
       }
     );
+    console.log(data);
+    if (data.total_results === 0) {
+      console.log("yes yes yse");
+      dispatch({
+        type: "SEARCHED_MOVIE",
+        payload: [{ kishor: "err" }],
+      });
+    }
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
       adult: obj.adult,
@@ -130,6 +215,43 @@ export const fetchTrendingMovies = () => {
     dispatch({ type: "TRENDING_MOVIE", payload: modifiedData });
   };
 };
+export const fetchFullMovieDetails = (movie_id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3//movie/${movie_id}`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = {
+      adult: data.adult,
+      backimg: posterUrl + data.backdrop_path,
+      collection: data.belongs_to_collection,
+      budget: data.budget,
+      genres: data.genres,
+      homepage: data.homepage,
+      id: data.id,
+      overview: data.overview,
+      posterimg: data.poster_path,
+      productionCompanies: data.production_companies,
+      relese: data.release_date,
+      revenue: data.revenue,
+      runtime: data.runtime,
+      status: data.status,
+      tagline: data.tagline,
+      title: data.title,
+      rating: data.vote_average,
+      rating_count: data.vote_count,
+    };
+    dispatch({ type: "FULL_MOVIE", payload: modData });
+  };
+};
+
 export const fetchBoxOfficeMovies = () => {
   return async (dispatch) => {
     const { data } = await axios.get(
@@ -260,6 +382,7 @@ export const fetchTopRatedMovies = () => {
     dispatch({ type: "TOP_RATED_MOVIE", payload: modifiedData });
   };
 };
+
 export const fetchGenre = () => {
   return async (dispatch) => {
     const { data } = await axios.get(genreUrl, {

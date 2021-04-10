@@ -60,15 +60,11 @@ export const TopRatedMovieReducer = (nowplaying = [], action) => {
   }
 };
 export const SearchedMovieReducer = (nowplaying = [], action) => {
-  if (nowplaying.length !== 0) {
-    return [...nowplaying];
-  } else {
-    switch (action.type) {
-      case "SEARCHED_MOVIE":
-        return [...nowplaying, ...action.payload];
-      default:
-        return nowplaying;
-    }
+  switch (action.type) {
+    case "SEARCHED_MOVIE":
+      return [...action.payload];
+    default:
+      return nowplaying;
   }
 };
 export const GenreMovieReducer = (nowplaying = [], action) => {
@@ -77,6 +73,46 @@ export const GenreMovieReducer = (nowplaying = [], action) => {
       return [...action.payload];
     default:
       return nowplaying;
+  }
+};
+export const FullMovieReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "FULL_MOVIE":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
+  }
+};
+export const MovieCastReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_CAST":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+export const MovieReviewReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_REVIEW":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+export const MovieCrewReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_CREW":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+export const MovieExtIdsReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "MOVIE_EXTIDS":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
   }
 };
 

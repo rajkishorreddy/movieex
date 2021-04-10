@@ -95,6 +95,7 @@
   justify-content: space-between;
   width: 100%;
   overflow: hidden;
+  min-height: 10vh;
   &-by {
     color: white;
     font-size: 1.2rem;
@@ -112,4 +113,7 @@
       cursor: pointer;
     }
   }
+}
+.infolink {
+  text-decoration: none;
 }

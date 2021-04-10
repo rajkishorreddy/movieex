@@ -3,6 +3,7 @@
   padding: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.13);
   position: relative;
+  min-height: 15vh;
   &-link {
     text-decoration: none;
     color: green;
@@ -26,12 +27,13 @@
     padding: 0.5rem 1rem 0.5rem 1rem;
   }
   &-test {
-    height: 65vh;
+    min-height: 65vh;
     background: #111;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     &-quote {
       width: 50%;
       color: #ddd;
@@ -119,6 +121,7 @@
       color: green;
       font-size: 1.5rem;
       outline: none;
+      cursor: pointer;
       &:active,
       &:focus {
         background: green;

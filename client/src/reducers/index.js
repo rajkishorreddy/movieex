@@ -12,6 +12,11 @@ import {
   TrendingMovieReducer,
   GenreMovieReducer,
   SearchedMovieReducer,
+  FullMovieReducer,
+  MovieExtIdsReducer,
+  MovieCastReducer,
+  MovieCrewReducer,
+  MovieReviewReducer,
 } from "./fetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -25,5 +30,10 @@ export default combineReducers({
   trendingPeople: TrendingPeopleReducer,
   upCommingMovie: upCommingMovieReducer,
   genreMovies: GenreMovieReducer,
+  fullMovieDetails: FullMovieReducer,
   searchedMovies: SearchedMovieReducer,
+  movieExtIds: MovieExtIdsReducer,
+  movieCast: MovieCastReducer,
+  movieCrew: MovieCrewReducer,
+  movieReview: MovieReviewReducer,
 });

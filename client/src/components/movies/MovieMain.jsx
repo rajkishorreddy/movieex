@@ -1,6 +1,7 @@
 import React from "react";
 import MovieSearch from "./MovieSearch";
 import MovieGenre from "./MovieGenre";
+import MovieInfo from "./MovieInfo";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import MovieBody from "./MovieBody";
 import sprite from "../../assets/sprite.svg";
@@ -16,11 +17,11 @@ const MovieMain = () => {
           <img src={logo} alt="logo" className="mvhdr-logo" />
         </Link>
         <div className="mvhdr-dispflex">
-          <Link to="/movies/genre" className="mvhdr-genrelink">
-            search by genre
-          </Link>
           <Link to="/movies/search" className="mvhdr-searchmv">
             Search for a movie
+          </Link>
+          <Link to="/movies/genre" className="mvhdr-genrelink">
+            search by genre
           </Link>
           {/* <form onSubmit={onSubmit} className="mvhdr-form">
             <input
@@ -34,6 +35,7 @@ const MovieMain = () => {
         </div>
       </div>
       <Switch>
+        <Route path={`${path}/info/:id`} component={MovieInfo} />
         <Route path={`${path}/search`} component={MovieSearch} />
         <Route path={`${path}/genre`} component={MovieGenre} />
         <Route path={`${path}/`} component={MovieBody} />

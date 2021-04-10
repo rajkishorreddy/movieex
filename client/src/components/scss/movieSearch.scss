@@ -5,6 +5,7 @@
 
   &-container {
     background: #111;
+    min-height: 10vh;
   }
   &-input {
     font-size: 2rem;
@@ -21,4 +22,29 @@
       width: 60%;
     }
   }
+}
+.search {
+  &-container {
+    background: #111;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 1rem;
+    position: relative;
+    min-height: 0vh;
+  }
+}
+.invalidImageSrc {
+  color: white;
+  font-size: 2rem;
+}
+.incHeight {
+  min-height: 72vh !important;
+}
+.errmsg {
+  position: absolute;
+  bottom: 0;
+  color: rgba(255, 255, 255, 0.178);
+  font-size: 1.2rem;
 }

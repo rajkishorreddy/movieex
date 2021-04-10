@@ -31,7 +31,13 @@ const Header = () => {
       </div>
       <h2 className="welcome">welcome to</h2>
       <h1 className="movieex">movieex.</h1>
-      <p className="confused">confused what to watch next?</p>
+      <form className="header-form">
+        <input
+          className="header-form-input"
+          type="text"
+          placeholder="search for a movie,TVshow or people..."
+        ></input>
+      </form>
       <p className="millions">
         millions of movies, TVshows and people to discover.
       </p>
@@ -44,6 +50,9 @@ const Header = () => {
         </Link>
         <Link to="/tvshows" className="explore-btn explore-tvshows">
           TVSHOWS
+        </Link>
+        <Link to="/people" className="explore-btn explore-tvshows">
+          PEOPLE
         </Link>
       </div>
       <div className="joker">

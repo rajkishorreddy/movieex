@@ -47,10 +47,12 @@ class MovieGenre extends React.Component {
     if (!this.props.genreMovies) return <div>Loading...</div>;
     return this.props.genreMovies.map((mv) => {
       return (
-        <div className="tprated-element" key={mv.id}>
-          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-          <div className="tprated-rating">{mv.rating}</div>
-        </div>
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
       );
     });
   }

@@ -12,6 +12,7 @@ import {
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import ListContainer from "./Listcontainer";
+import { Link } from "react-router-dom";
 class MovieBody extends React.Component {
   constructor(props) {
     super(props);
@@ -63,10 +64,12 @@ class MovieBody extends React.Component {
     }
     this.topRatedmovies = this.props.topRatedMovies.map((mv) => {
       return (
-        <div className="tprated-element" key={mv.id}>
-          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-          <div className="tprated-rating">{mv.rating}</div>
-        </div>
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
       );
     });
     // return this.popularMovies;
@@ -77,10 +80,12 @@ class MovieBody extends React.Component {
     }
     this.trendingMovies = this.props.trendingMovies.map((mv) => {
       return (
-        <div className="tprated-element" key={mv.id}>
-          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-          <div className="tprated-rating">{mv.rating}</div>
-        </div>
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
       );
     });
     // return this.popularMovies;
@@ -91,10 +96,12 @@ class MovieBody extends React.Component {
     }
     this.popularMovies = this.props.popularMovies.map((mv) => {
       return (
-        <div className="tprated-element" key={mv.id}>
-          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-          <div className="tprated-rating">{mv.rating}</div>
-        </div>
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
       );
     });
     // return this.listtocheck;
@@ -106,10 +113,12 @@ class MovieBody extends React.Component {
     }
     this.boxOfficeMovies = this.props.boxOfficeMovies.map((mv) => {
       return (
-        <div className="tprated-element" key={mv.id}>
-          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-          <div className="tprated-rating">{mv.rating}</div>
-        </div>
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
       );
     });
   }
@@ -119,10 +128,12 @@ class MovieBody extends React.Component {
     }
     this.upCommingMovies = this.props.upCommingMovies.reverse().map((mv) => {
       return (
-        <div className="tprated-element" key={mv.id}>
-          <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-          <div className="tprated-rating">{mv.rating}</div>
-        </div>
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
       );
     });
   }

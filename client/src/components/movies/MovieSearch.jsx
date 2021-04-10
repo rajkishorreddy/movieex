@@ -1,14 +1,35 @@
 import React, { useState } from "react";
 import "../scss/movieSearch.scss";
-import sprite from "../../assets/sprite.svg";
 import { fetchSearchedMovies } from "../../actions";
 import { connect } from "react-redux";
-const MovieSearch = () => {
+import { Link } from "react-router-dom";
+const MovieSearch = (props) => {
   const [term, setTerm] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(term);
+    props.fetchSearchedMovies(term);
   };
+
+  const renderMovies = () => {
+    if (!props.searchedMovies) {
+      return <div>Loading...</div>;
+    }
+    return props.searchedMovies.map((mv) => {
+      return (
+        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img
+              src={mv.poster}
+              className="tprated-img invalidImageSrc"
+              alt={mv.title}
+            ></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  };
+
   return (
     <div>
       <div className="search-form-container">
@@ -23,38 +44,24 @@ const MovieSearch = () => {
           ></input>
         </form>
       </div>
-      {-1 > 0 ? (
-        <div className="genre-container">
-          {this.renderMoviesByGenre()}
-          <div
-            onClick={() => this.handleRightClick()}
-            className="genre-container-right"
-          >
-            click for more!
-            <svg className="genre-container-right-item">
-              <use xlinkHref={`${sprite}#icon-arrow-right`}></use>
-            </svg>
-          </div>
-          <div
-            onClick={() => this.handleLeftClick()}
-            className="genre-container-left"
-          >
-            <svg className="genre-container-left-item">
-              <use xlinkHref={`${sprite}#icon-arrow-left`}></use>
-            </svg>
-          </div>
-        </div>
+      {props.searchedMovies.length > 0 ? (
+        <div className="genre-container incHeight">{renderMovies()}</div>
       ) : (
-        <div className="genre-test">
+        <div className="genre-test incHeight">
           <div className="genre-test-quote">
-            “People want to see something that shows them you can do what you
-            say. That’s the trick.“{" "}
-            <span className="genre-test-quote-small">– Christopher Nolan</span>
+            “We don't make movies to make more money . We make money to make
+            more movies.”
+            <span className="genre-test-quote-small">- Walt Disney</span>
+          </div>
+          <div className="errmsg">
+            if searched and not found! please check the spelling
           </div>
         </div>
       )}
     </div>
   );
 };
-const mapStateToProps = (state) => {};
-export default MovieSearch;
+const mapStateToProps = (state) => {
+  return { searchedMovies: state.searchedMovies };
+};
+export default connect(mapStateToProps, { fetchSearchedMovies })(MovieSearch);
