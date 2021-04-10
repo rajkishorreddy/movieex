@@ -67,6 +67,30 @@ export const SearchedMovieReducer = (nowplaying = [], action) => {
       return nowplaying;
   }
 };
+export const MovieRentReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_RENT":
+      return [...action.payload];
+    default:
+      return nowplaying;
+  }
+};
+export const MovieFlatReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_FLAT":
+      return [...action.payload];
+    default:
+      return nowplaying;
+  }
+};
+export const MovieBuyReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_BUY":
+      return [...action.payload];
+    default:
+      return nowplaying;
+  }
+};
 export const GenreMovieReducer = (nowplaying = [], action) => {
   switch (action.type) {
     case "GENRE_MOVIE":

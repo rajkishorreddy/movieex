@@ -5,11 +5,15 @@ import {
   fetchMovieCast,
   fetchMovieCrew,
   fetchMovieReviews,
+  fetchMovieBuy,
+  fetchMovieFlatrate,
+  fetchMovieRent,
 } from "../../actions";
 import { connect } from "react-redux";
 import "../scss/movieInfo.scss";
 import sprite from "../../assets/sprite.svg";
 import ListContainer from "./Listcontainer";
+import repimg from "../../assets/repimg.png";
 class MovieInfo extends React.Component {
   componentDidMount() {
     const fetchapi = async () => {
@@ -18,6 +22,9 @@ class MovieInfo extends React.Component {
       await this.props.fetchMovieCast(this.props.match.params.id);
       await this.props.fetchMovieCrew(this.props.match.params.id);
       await this.props.fetchMovieReviews(this.props.match.params.id);
+      await this.props.fetchMovieBuy(this.props.match.params.id);
+      await this.props.fetchMovieFlatrate(this.props.match.params.id);
+      await this.props.fetchMovieRent(this.props.match.params.id);
     };
     fetchapi();
   }
@@ -97,6 +104,57 @@ class MovieInfo extends React.Component {
       ));
     }
   }
+  renderbuy() {
+    if (!this.props.buyat) return <div>Loading...</div>;
+    if (this.props.movieDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    if (this.props.buyat.length === 0)
+      return <div className="wp-none">NO SERVICES AVAILABLE</div>;
+    else {
+      return this.props.buyat.map((el) => {
+        return (
+          <div key={el.id} className="wp-buy-item">
+            <img className="wp-buy-item-img" src={el.logo} alt={el.name} />
+            <div className="wp-buy-item-name">{el.name}</div>
+          </div>
+        );
+      });
+    }
+  }
+  renderrent() {
+    if (!this.props.rentat) return <div>Loading...</div>;
+    if (this.props.movieDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    if (this.props.rentat.length === 0)
+      return <div className="wp-none">NO SERVICES AVAILABLE</div>;
+    else {
+      return this.props.rentat.map((el) => {
+        return (
+          <div key={el.id} className="wp-buy-item">
+            <img className="wp-buy-item-img" src={el.logo} alt={el.name} />
+            <div className="wp-buy-item-name">{el.name}</div>
+          </div>
+        );
+      });
+    }
+  }
+  renderflat() {
+    if (!this.props.flatat) return <div>Loading...</div>;
+    if (this.props.movieDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    if (this.props.flatat.length === 0)
+      return <div className="wp-none">NO SERVICES AVAILABLE</div>;
+    else {
+      return this.props.flatat.map((el) => {
+        return (
+          <div key={el.id} className="wp-buy-item">
+            <img className="wp-buy-item-img" src={el.logo} alt={el.name} />
+            <div className="wp-buy-item-name">{el.name}</div>
+          </div>
+        );
+      });
+    }
+  }
   renderBody() {
     if (!this.props.movieDetails) return <div>Loading...</div>;
     if (this.props.movieDetails.id !== Number(this.props.match.params.id))
@@ -163,10 +221,6 @@ class MovieInfo extends React.Component {
                 Revenue : {mv.revenue === 0 ? `no info` : `${mv.revenue}$`}
               </div>
             </div>
-            {/* <div className="info-production">
-            <div className="info-production-title">PRODUCTION</div>
-            {this.renderProduction()}
-          </div> */}
             <a href={mv.homepage} className="info-link">
               VISIT HOME PAGE OF THIS MOVIE
             </a>
@@ -179,6 +233,23 @@ class MovieInfo extends React.Component {
               <br />
               {mv.overview}
             </p>
+          </div>
+          <div className="info-production-title">Production</div>
+          <div className="info-production">{this.renderProduction()}</div>
+          <div className="wp">
+            <div className="wp-title">WatchProviders</div>
+            <div className="wp-buy">
+              <h5 className="wp-buy-title">Rent</h5>
+              {this.renderrent()}
+            </div>
+            <div className="wp-buy">
+              <h5 className="wp-buy-title">Faltrate</h5>
+              {this.renderflat()}
+            </div>
+            <div className="wp-buy">
+              <h5 className="wp-buy-title">Buy</h5>
+              {this.renderbuy()}
+            </div>
           </div>
           <ListContainer title={"CAST"} list={this.castList} />
           <ListContainer title={"CREW"} list={this.crewList} />
@@ -206,6 +277,9 @@ const mapStateToProps = (state) => {
     cast: state.movieCast,
     crew: state.movieCrew,
     reviews: state.movieReview,
+    buyat: state.movieBuy,
+    flatat: state.movieFlat,
+    rentat: state.movieRent,
   };
 };
 export default connect(mapStateToProps, {
@@ -214,4 +288,7 @@ export default connect(mapStateToProps, {
   fetchMovieCast,
   fetchMovieCrew,
   fetchMovieReviews,
+  fetchMovieBuy,
+  fetchMovieRent,
+  fetchMovieFlatrate,
 })(MovieInfo);

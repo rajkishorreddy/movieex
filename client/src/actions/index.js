@@ -17,18 +17,81 @@ const trendingPersons = `${url}/trending/person/week`;
 //   );
 //   console.log(data);
 // };
-const test = async () => {
-  const { data } = await axios.get(
-    `https://api.themoviedb.org/3/movie/299534/reviews`,
-    {
-      params: {
-        api_key: apiKey,
-      },
-    }
-  );
-  console.log(data);
+// const test = async () => {
+//   const { data } = await axios.get(
+//     `https://api.themoviedb.org/3/movie/399566/watch/providers`,
+//     {
+//       params: {
+//         api_key: apiKey,
+//       },
+//     }
+//   );
+//   console.log(data.results.US);
+// };
+// test();
+export const fetchMovieRent = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    let modData = data.results.US.rent?.map((el) => ({
+      id: el.provider_id,
+      logo: posterUrl + el.logo_path,
+      name: el.provider_name,
+    }));
+    if (!modData) modData = [];
+    console.log(modData);
+    dispatch({ type: "MOVIE_RENT", payload: modData });
+  };
 };
-test();
+export const fetchMovieFlatrate = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    let modData = data.results.US.flatrate?.map((el) => ({
+      id: el.provider_id,
+      logo: posterUrl + el.logo_path,
+      name: el.provider_name,
+    }));
+    if (!modData) modData = [];
+    console.log(modData);
+    dispatch({ type: "MOVIE_FLAT", payload: modData });
+  };
+};
+export const fetchMovieBuy = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    let modData = data.results.US.buy?.map((el) => ({
+      id: el.provider_id,
+      logo: posterUrl + el.logo_path,
+      name: el.provider_name,
+    }));
+    if (!modData) modData = [];
+    console.log(modData);
+    dispatch({ type: "MOVIE_BUY", payload: modData });
+  };
+};
 export const fetchMovieReviews = (id) => {
   return async (dispatch) => {
     const { data } = await axios.get(

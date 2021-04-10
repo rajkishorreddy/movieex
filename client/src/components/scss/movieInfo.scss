@@ -106,33 +106,30 @@
     padding: 1rem;
   }
   &-production {
-    width: 25rem;
-    position: absolute;
-    right: 15%;
-    top: 10%;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.185);
-    padding: 2rem;
-    border-radius: 2rem;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    background: #111;
     &-title {
-      font-size: 2.5rem;
-      color: black;
+      font-size: 3rem;
+      color: #ddd;
+      font-weight: 500;
+      background: #111;
+      padding: 1rem;
       font-weight: 500;
     }
     &-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 1rem;
       &-logo {
         width: 12rem;
         margin: 0.5rem;
       }
       &-name {
         font-size: 1.5rem;
+        color: rgba(221, 221, 221, 0.534);
       }
     }
   }
@@ -240,6 +237,16 @@
   &-img {
     width: 15rem;
     border-radius: 1rem;
+    position: relative;
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 100%;
+    //   top: 0;
+    //   left: 0;
+    //   background: url(../../assets/repimg.png);
+    // }
   }
   &-char {
     color: #ddd;
@@ -273,5 +280,49 @@
     color: rgba(255, 255, 255, 0.438);
     font-size: 1.2rem;
     white-space: normal;
+  }
+}
+
+.wp {
+  background: #111;
+  &-title {
+    color: #ddd;
+    font-size: 3rem;
+    font-weight: 500;
+    padding: 1rem;
+  }
+  &-none {
+    font-size: 1.5rem;
+    color: rgba(221, 221, 221, 0.377);
+    margin-left: 1rem;
+  }
+  &-buy {
+    margin-left: 4rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &-title {
+      padding: 1rem;
+      font-size: 2rem;
+      align-self: start;
+      color: #ddd;
+      width: 10rem;
+    }
+    &-item {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin: 1.5rem;
+      &-img {
+        width: 5rem;
+        border-radius: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      &-name {
+        font-size: 1.5rem;
+        color: rgba(221, 221, 221, 0.548);
+      }
+    }
   }
 }
