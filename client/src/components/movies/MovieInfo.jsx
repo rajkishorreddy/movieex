@@ -1,4 +1,6 @@
 import React from "react";
+import ModalVideo from "react-modal-video";
+import "react-modal-video/scss/modal-video.scss";
 import {
   fetchFullMovieDetails,
   fetchMovieExternalIds,
@@ -15,9 +17,20 @@ import { connect } from "react-redux";
 import "../scss/movieInfo.scss";
 import sprite from "../../assets/sprite.svg";
 import ListContainer from "./Listcontainer";
-import repimg from "../../assets/repimg.png";
+// import repimg from "../../assets/repimg.png";
 import { Link } from "react-router-dom";
 class MovieInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false,
+    };
+    this.openModal = this.openModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({ isOpen: true });
+  }
   componentDidMount() {
     const fetchapi = async () => {
       await this.props.fetchFullMovieDetails(this.props.match.params.id);
@@ -224,14 +237,17 @@ class MovieInfo extends React.Component {
               </span>
               {mv.runtime} min
             </div>
-            <div className="info-trailer">
-              <span>
-                <svg className="info-trailer-icon">
-                  <use xlinkHref={`${sprite}#icon-play2`}></use>
-                </svg>
-              </span>
-              Watch Trailer
-            </div>
+            <button onClick={this.openModal}>
+              <div className="info-trailer">
+                <span>
+                  <svg className="info-trailer-icon">
+                    <use xlinkHref={`${sprite}#icon-play2`}></use>
+                  </svg>
+                </span>
+                Watch Trailer
+              </div>
+            </button>
+
             <div className="info-extids">
               <a
                 href={`https://www.instagram.com/${this.props.extIds.instagram_id}`}
@@ -305,6 +321,13 @@ class MovieInfo extends React.Component {
           <ListContainer
             title={"Recomended Movies"}
             list={this.recomendedMovies}
+          />
+          <ModalVideo
+            channel="youtube"
+            autoplay
+            isOpen={this.state.isOpen}
+            videoId="OT2b5KzMoC0"
+            onClose={() => this.setState({ isOpen: false })}
           />
         </div>
       );

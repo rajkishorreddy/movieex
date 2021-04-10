@@ -19,7 +19,7 @@ const trendingPersons = `${url}/trending/person/week`;
 // };
 const test = async () => {
   const { data } = await axios.get(
-    `https://api.themoviedb.org/3/movie/399566/recommendations`,
+    `https://api.themoviedb.org/3/movie/399566/videos`,
     {
       params: {
         api_key: apiKey,
@@ -29,6 +29,23 @@ const test = async () => {
   console.log(data.results);
 };
 test();
+
+export const fetchMovieVideos = (ID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/movie/${ID}/videos`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({}));
+    dispatch({ type: "RECOMENDED_MOVIE", payload: modifiedData });
+  };
+};
 export const fetchRecomendedMovies = (ID) => {
   return async (dispatch) => {
     const { data } = await axios.get(
