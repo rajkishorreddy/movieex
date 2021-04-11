@@ -185,10 +185,11 @@ export const fetchTopRatedtvShows = () => {
         params: {
           api_key: apiKey,
           language: "en_US",
-          with_original_language: "US",
+          // with_original_language: "US",
         },
       }
     );
+    console.log(data);
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
       backimg: posterUrl + obj.backdrop_path,

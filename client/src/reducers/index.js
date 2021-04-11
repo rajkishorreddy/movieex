@@ -3,8 +3,6 @@ import {
   nowPlayingMovieReducer,
   TopRatedMovieReducer,
   GenreListReducer,
-  PopularTvReducer,
-  TopRatedTvReducer,
   TrendingPeopleReducer,
   PopularMovieReducer,
   upCommingMovieReducer,
@@ -24,6 +22,16 @@ import {
   RecomendedMovieReducer,
   MovieVideoReducer,
 } from "./fetchingReducer";
+import {
+  HboTvReducer,
+  HboMaxTvReducer,
+  HotstarTvReducer,
+  AmazonTvReducer,
+  NetflixTvReducer,
+  MostVotedTvReducer,
+  PopularTvReducer,
+  TopRatedTvReducer,
+} from "./tvfetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
   TopRatedMovies: TopRatedMovieReducer,
@@ -31,8 +39,7 @@ export default combineReducers({
   boxOfficeMovie: boxOfficeMovieReducer,
   trendingMovie: TrendingMovieReducer,
   genreList: GenreListReducer,
-  PopularTv: PopularTvReducer,
-  topRatedTv: TopRatedTvReducer,
+
   trendingPeople: TrendingPeopleReducer,
   upCommingMovie: upCommingMovieReducer,
   genreMovies: GenreMovieReducer,
@@ -48,4 +55,12 @@ export default combineReducers({
   similarMovie: SimilarMovieReducer,
   recomendedMovies: RecomendedMovieReducer,
   movieVideos: MovieVideoReducer,
+  hbotv: HboTvReducer,
+  hbomaxtv: HboMaxTvReducer,
+  hotstartv: HotstarTvReducer,
+  amazontv: AmazonTvReducer,
+  netflixtv: NetflixTvReducer,
+  mostvotedtv: MostVotedTvReducer,
+  PopularTv: PopularTvReducer,
+  topRatedTv: TopRatedTvReducer,
 });
