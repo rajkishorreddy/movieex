@@ -99,6 +99,14 @@ export const SimilarMovieReducer = (nowplaying = [], action) => {
       return [...nowplaying];
   }
 };
+export const MovieVideoReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "MOVIE_VIDEO":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
 export const RecomendedMovieReducer = (nowplaying = [], action) => {
   switch (action.type) {
     case "RECOMENDED_MOVIE":

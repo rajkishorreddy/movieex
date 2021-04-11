@@ -6,7 +6,11 @@
   justify-content: space-between;
   width: 100%;
   overflow: hidden;
-  min-height: 7vh;
+  @media only screen and (max-width: 26em) {
+    padding: 0;
+    align-items: start;
+    min-height: 11vh;
+  }
   &-searchmv {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.356);
@@ -16,8 +20,9 @@
     font-size: 1.3rem;
     margin-right: 2rem;
     @media only screen and (max-width: 26em) {
-      width: 35rem;
+      width: 30rem;
       font-size: 1.9rem;
+      margin: 0.5rem;
     }
   }
   &-dispflex {
@@ -38,16 +43,21 @@
     font-size: 1.3rem;
     margin-right: 2rem;
     @media only screen and (max-width: 26em) {
-      width: 35rem;
+      width: 30rem;
       font-size: 1.9rem;
+      margin: 0.5rem;
     }
   }
   &-logo {
     height: 4rem;
     width: 12rem;
     margin-left: 2rem;
+
     @media only screen and (max-width: 36.5em) {
       margin-left: 0;
+    }
+    @media only screen and (max-width: 26em) {
+      margin-top: 3rem;
     }
   }
   &-input {
@@ -58,6 +68,7 @@
     @media only screen and (max-width: 36.5em) {
       margin-right: 0;
     }
+
     padding: 0.8rem 1rem 0.8rem 1rem;
     font-family: inherit;
     border-radius: 10rem;

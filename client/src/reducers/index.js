@@ -22,6 +22,7 @@ import {
   MovieFlatReducer,
   SimilarMovieReducer,
   RecomendedMovieReducer,
+  MovieVideoReducer,
 } from "./fetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -46,4 +47,5 @@ export default combineReducers({
   movieFlat: MovieFlatReducer,
   similarMovie: SimilarMovieReducer,
   recomendedMovies: RecomendedMovieReducer,
+  movieVideos: MovieVideoReducer,
 });

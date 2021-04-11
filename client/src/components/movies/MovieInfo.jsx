@@ -12,6 +12,7 @@ import {
   fetchMovieRent,
   fetchSimilarMovies,
   fetchRecomendedMovies,
+  fetchMovieVideos,
 } from "../../actions";
 import { connect } from "react-redux";
 import "../scss/movieInfo.scss";
@@ -43,6 +44,7 @@ class MovieInfo extends React.Component {
       await this.props.fetchMovieRent(this.props.match.params.id);
       await this.props.fetchRecomendedMovies(this.props.match.params.id);
       await this.props.fetchSimilarMovies(this.props.match.params.id);
+      await this.props.fetchMovieVideos(this.props.match.params.id);
     };
     fetchapi();
 
@@ -226,16 +228,19 @@ class MovieInfo extends React.Component {
           <div className="info-header">
             <img className="info-back" src={mv.backimg} alt={mv.title} />
             <div className="info-blur"></div>
-            <div className="info-title">{mv.title}</div>
-            <div className="info-tagline">{mv.tagline}</div>
-            <div className="info-visite-msg">visit official movie pages</div>
+            <div className="info-title">
+              {mv.title}
+              <br />
+              <span className="info-tagline">{mv.tagline}</span>
+            </div>
+
             <div className="info-runtime">
               <span>
                 <svg className="info-runtime-icon">
                   <use xlinkHref={`${sprite}#icon-clock`}></use>
                 </svg>
               </span>
-              {mv.runtime} min
+              {`${Math.floor(mv.runtime / 60)} hr ${mv.runtime % 60} min`}
             </div>
             <button onClick={this.openModal}>
               <div className="info-trailer">
@@ -273,15 +278,20 @@ class MovieInfo extends React.Component {
                   <use xlinkHref={`${sprite}#icon-twitter`}></use>
                 </svg>
               </a>
+              <div className="info-visite-msg">visit official movie pages</div>
             </div>
             <div className="info-genre">{this.renderGenre()}</div>
             <div className="info-money">
               <div className="info-money-budget">
-                Budget : {mv.budget === 0 ? `no info` : `${mv.budget}$`}
+                Budget :{" "}
+                {mv.budget === 0 ? `no info` : `${mv.budget.toLocaleString()}$`}
               </div>
               <div className="info-money-revenue">
                 {" "}
-                Revenue : {mv.revenue === 0 ? `no info` : `${mv.revenue}$`}
+                Revenue :{" "}
+                {mv.revenue === 0
+                  ? `no info`
+                  : `${mv.revenue.toLocaleString()}$`}
               </div>
             </div>
             <a href={mv.homepage} className="info-link">
@@ -303,30 +313,38 @@ class MovieInfo extends React.Component {
             <div className="wp-title">WatchProviders</div>
             <div className="wp-buy">
               <h5 className="wp-buy-title">Rent</h5>
-              {this.renderrent()}
+              <div className="wp-buy-list">{this.renderrent()}</div>
             </div>
             <div className="wp-buy">
               <h5 className="wp-buy-title">Streaming</h5>
-              {this.renderflat()}
+              <div className="wp-buy-list">{this.renderflat()}</div>
             </div>
             <div className="wp-buy">
               <h5 className="wp-buy-title">Buy</h5>
-              {this.renderbuy()}
+              <div className="wp-buy-list">{this.renderbuy()}</div>
             </div>
           </div>
           <ListContainer title={"CAST"} list={this.castList} />
           <ListContainer title={"CREW"} list={this.crewList} />
-          <ListContainer title={"Reviews"} list={this.reviewList} />
-          <ListContainer title={"Similar Movies"} list={this.similarMovie} />
-          <ListContainer
-            title={"Recomended Movies"}
-            list={this.recomendedMovies}
-          />
+
+          {this.props.reviews.length ? (
+            <ListContainer title={"Reviews"} list={this.reviewList} />
+          ) : null}
+          {this.props.similarMovie.length ? (
+            <ListContainer title={"Similar Movies"} list={this.similarMovie} />
+          ) : null}
+          {this.props.recomendedMovies.length ? (
+            <ListContainer
+              title={"Recomended Movies"}
+              list={this.recomendedMovies}
+            />
+          ) : null}
+
           <ModalVideo
             channel="youtube"
             autoplay
             isOpen={this.state.isOpen}
-            videoId="OT2b5KzMoC0"
+            videoId={this.props.videos[0]?.key}
             onClose={() => this.setState({ isOpen: false })}
           />
         </div>
@@ -363,6 +381,7 @@ const mapStateToProps = (state) => {
     rentat: state.movieRent,
     similarMovie: state.similarMovie,
     recomendedMovies: state.recomendedMovies,
+    videos: state.movieVideos,
   };
 };
 export default connect(mapStateToProps, {
@@ -376,4 +395,5 @@ export default connect(mapStateToProps, {
   fetchMovieFlatrate,
   fetchSimilarMovies,
   fetchRecomendedMovies,
+  fetchMovieVideos,
 })(MovieInfo);

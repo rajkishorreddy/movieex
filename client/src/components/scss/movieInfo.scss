@@ -45,6 +45,7 @@
     top: 18rem;
     left: 5rem;
     padding: 0.5rem;
+
     &:after {
       content: "";
       position: absolute;
@@ -52,26 +53,18 @@
       background: black;
       height: 0.2rem;
       width: 100%;
-      left: -7rem;
+      left: -15rem;
+      bottom: 0;
     }
   }
   &-tagline {
     font-size: 2rem;
     font-weight: 500;
     color: #bbb;
+    // margin-left: 20rem;
     position: absolute;
-    top: 26rem;
-    left: 10rem;
-    padding: 0.5rem;
-    // &:after {
-    //   content: "";
-    //   position: absolute;
-    //   bottom: 0rem;
-    //   background: black;
-    //   height: 0.2rem;
-    //   width: 100%;
-    //   left: 10rem;
-    // }
+    bottom: -3rem;
+    right: 8rem;
   }
   &-money {
     position: absolute;
@@ -146,10 +139,20 @@
     transform: translateX(-50%);
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 47.5rem) {
+      top: 0;
+      height: 5rem;
+    }
+    @media only screen and (max-width: 25rem) {
+      top: 0;
+      left: 5rem;
+      height: 5rem;
+    }
     &-icon {
       width: 3rem;
       height: 3rem;
       margin: 0.5rem;
+      fill: rgba(255, 255, 255, 0.486);
     }
   }
   &-trailer {
@@ -177,6 +180,9 @@
     top: 18rem;
     right: 0;
     background: black;
+    @media only screen and (max-width: 35rem) {
+      top: 30rem;
+    }
     &-link {
       &-logo {
         width: 2.5rem;
@@ -203,12 +209,12 @@
   }
   &-visite-msg {
     position: absolute;
-    right: -5rem;
-    bottom: 13rem;
+    right: -6rem;
+    bottom: -8rem;
     transform: rotate(-90deg);
-    // background: red;
     font-size: 1.2rem;
     font-weight: 500;
+    width: 14rem;
   }
 }
 .ov {
@@ -302,13 +308,17 @@
     margin-left: 1rem;
   }
   &-buy {
-    margin-left: 4rem;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-
+    &-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-left: 4rem;
+    }
     &-title {
       padding: 1rem;
+      margin-left: 3rem;
       font-size: 2rem;
       align-self: start;
       color: #ddd;

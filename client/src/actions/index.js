@@ -18,18 +18,131 @@ const trendingPersons = `${url}/trending/person/week`;
 //   console.log(data);
 // };
 const test = async () => {
-  const { data } = await axios.get(
-    `https://api.themoviedb.org/3/movie/399566/videos`,
-    {
-      params: {
-        api_key: apiKey,
-      },
-    }
-  );
-  console.log(data.results);
+  const { data } = await axios.get(`https://api.themoviedb.org/3/discover/tv`, {
+    params: {
+      api_key: apiKey,
+      language: "en_US",
+      with_original_language: "en",
+      // sort_by: "vote_average.desc,vote_count.desc",
+      sort_by: ["vote_average.desc", "vote_count.desc"],
+    },
+  });
+  console.log(data);
 };
 test();
-
+export const fetchTopRatedtvShows = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/top_rated`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+          with_original_language: "US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.name,
+      origin_country: obj.origin_country,
+      original_language: obj.original_language,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.first_air_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "TV_POPULAR", payload: modifiedData });
+  };
+};
+export const fetchPopularTvShows = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/popular`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.name,
+      origin_country: obj.origin_country,
+      original_language: obj.original_language,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.first_air_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "TV_POPULAR", payload: modifiedData });
+  };
+};
+export const fetchTvShowsOnAir = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/on_the_air`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.name,
+      origin_country: obj.origin_country,
+      original_language: obj.original_language,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.first_air_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "TV_AIRING", payload: modifiedData });
+  };
+};
+export const fetchTvShowsAirToday = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/airing_today`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      backimg: posterUrl + obj.backdrop_path,
+      genre_ids: obj.genre_ids,
+      id: obj.id,
+      title: obj.name,
+      origin_country: obj.origin_country,
+      original_language: obj.original_language,
+      overview: obj.overview,
+      poster: posterUrl + obj.poster_path,
+      release: obj.first_air_date,
+      rating: obj.vote_average,
+      rating_count: obj.vote_count,
+    }));
+    dispatch({ type: "TV_AIRING_TODAY", payload: modifiedData });
+  };
+};
 export const fetchMovieVideos = (ID) => {
   return async (dispatch) => {
     const { data } = await axios.get(
@@ -41,9 +154,13 @@ export const fetchMovieVideos = (ID) => {
         },
       }
     );
-    const posterUrl = "https://image.tmdb.org/t/p/original/";
-    const modifiedData = data["results"].map((obj) => ({}));
-    dispatch({ type: "RECOMENDED_MOVIE", payload: modifiedData });
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      key: obj.key,
+      name: obj.name,
+      type: obj.type,
+    }));
+    dispatch({ type: "MOVIE_VIDEO", payload: modifiedData });
   };
 };
 export const fetchRecomendedMovies = (ID) => {
