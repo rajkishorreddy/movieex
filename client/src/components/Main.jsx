@@ -9,8 +9,7 @@ import {
   fetchNowPlayingMovies,
   fetchTopRatedMovies,
   fetchGenre,
-  fetchPopularTv,
-  fetchTopRatedTv,
+  fetchPopularTvShows,
   fetchTrendingPeople,
 } from "../actions";
 class Main extends React.Component {
@@ -19,8 +18,7 @@ class Main extends React.Component {
       await this.props.fetchGenre();
       await this.props.fetchNowPlayingMovies();
       await this.props.fetchTopRatedMovies();
-      await this.props.fetchPopularTv();
-      await this.props.fetchTopRatedTv();
+      await this.props.fetchPopularTvShows();
       await this.props.fetchTrendingPeople();
     };
     fetchapi();
@@ -156,7 +154,6 @@ const mapStateToProps = (state) => {
     topRatedMovies: state.TopRatedMovies,
     genreList: state.genreList,
     PopularTv: state.PopularTv,
-    topRatedTv: state.topRatedTv,
     trendingPeople: state.trendingPeople,
   };
 };
@@ -164,7 +161,6 @@ export default connect(mapStateToProps, {
   fetchNowPlayingMovies,
   fetchTopRatedMovies,
   fetchGenre,
-  fetchPopularTv,
-  fetchTopRatedTv,
+  fetchPopularTvShows,
   fetchTrendingPeople,
 })(Main);
