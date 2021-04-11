@@ -4,13 +4,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import "../scss/tv/tvbody.scss";
 import { Link } from "react-router-dom";
+import ListContainer from "../movies/Listcontainer";
 import {
   fetchHboTvShows,
   fetchHboMaxTvShows,
   fetchHotstarTvShows,
   fetchAmazonTvShows,
   fetchNetflixTvShows,
-  fetchTopRatedtvShows,
   fetchPopularTvShows,
   fetchTvShowsMostVoted,
 } from "../../actions";
@@ -22,7 +22,6 @@ class TvBody extends React.Component {
       await this.props.fetchHotstarTvShows();
       await this.props.fetchAmazonTvShows();
       await this.props.fetchNetflixTvShows();
-      await this.props.fetchTopRatedtvShows();
       await this.props.fetchPopularTvShows();
       await this.props.fetchTvShowsMostVoted();
     };
@@ -70,7 +69,104 @@ class TvBody extends React.Component {
       );
     });
   }
+  renderhbomax() {
+    if (!this.props.hbomax) {
+      return <div>Loading...</div>;
+    }
+    this.hbomax = this.props.hbomax.map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
+  renderhotstar() {
+    if (!this.props.hotstar) {
+      return <div>Loading...</div>;
+    }
+    this.hotstar = this.props.hotstar.map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
+  renderamazon() {
+    if (!this.props.amazon) {
+      return <div>Loading...</div>;
+    }
+    this.amazon = this.props.amazon.map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
+  rendernetflix() {
+    if (!this.props.netflix) {
+      return <div>Loading...</div>;
+    }
+    this.netflix = this.props.netflix.map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
+  rendermostvoted() {
+    if (!this.props.mostvoted) {
+      return <div>Loading...</div>;
+    }
+    this.mostvoted = this.props.mostvoted.map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
+  renderpopular() {
+    if (!this.props.popular) {
+      return <div>Loading...</div>;
+    }
+    this.popular = this.props.popular.reverse().map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
   render() {
+    this.renderHbo();
+    this.renderhbomax();
+    this.renderhotstar();
+    this.renderamazon();
+    this.rendernetflix();
+    this.rendermostvoted();
+    this.renderpopular();
     return (
       <div>
         {" "}
@@ -87,6 +183,13 @@ class TvBody extends React.Component {
             {this.renderSlider()}
           </Carousel>
         </div>
+        <ListContainer title={"Popular on NETFLIX"} list={this.netflix} />
+        <ListContainer title={"Popular on PRIME VIDEO"} list={this.amazon} />
+        <ListContainer title={"Popular on HOTSTAR"} list={this.hotstar} />
+        <ListContainer title={"Popular on HBO"} list={this.hbo} />
+        <ListContainer title={"Popular on HBOMAX"} list={this.hbomax} />
+        <ListContainer title={"Most voted"} list={this.mostvoted} />
+        <ListContainer title={"Popular on movieex"} list={this.popular} />
       </div>
     );
   }
@@ -111,7 +214,6 @@ export default connect(mapStateToProps, {
   fetchHotstarTvShows,
   fetchAmazonTvShows,
   fetchNetflixTvShows,
-  fetchTopRatedtvShows,
   fetchPopularTvShows,
   fetchTvShowsMostVoted,
 })(TvBody);

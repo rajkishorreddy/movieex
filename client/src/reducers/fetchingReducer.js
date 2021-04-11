@@ -1,49 +1,33 @@
 export const nowPlayingMovieReducer = (nowplaying = [], action) => {
-  if (nowplaying.length !== 0) {
-    return [...nowplaying];
-  } else {
-    switch (action.type) {
-      case "NOW_PLAYING_MOVIE":
-        return [...nowplaying, ...action.payload];
-      default:
-        return nowplaying;
-    }
+  switch (action.type) {
+    case "NOW_PLAYING_MOVIE":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
   }
 };
 export const TrendingMovieReducer = (nowplaying = [], action) => {
-  if (nowplaying.length !== 0) {
-    return [...nowplaying];
-  } else {
-    switch (action.type) {
-      case "TRENDING_MOVIE":
-        return [...nowplaying, ...action.payload];
-      default:
-        return nowplaying;
-    }
+  switch (action.type) {
+    case "TRENDING_MOVIE":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
   }
 };
 export const boxOfficeMovieReducer = (nowplaying = [], action) => {
-  if (nowplaying.length !== 0) {
-    return [...nowplaying];
-  } else {
-    switch (action.type) {
-      case "BOXOFFICE_MOVIE":
-        return [...nowplaying, ...action.payload];
-      default:
-        return nowplaying;
-    }
+  switch (action.type) {
+    case "BOXOFFICE_MOVIE":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
   }
 };
 export const upCommingMovieReducer = (nowplaying = [], action) => {
-  if (nowplaying.length !== 0) {
-    return [...nowplaying];
-  } else {
-    switch (action.type) {
-      case "UPCOMMING_MOVIE":
-        return [...nowplaying, ...action.payload];
-      default:
-        return nowplaying;
-    }
+  switch (action.type) {
+    case "UPCOMMING_MOVIE":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
   }
 };
 

@@ -57,8 +57,8 @@ export const TopRatedTvReducer = (nowplaying = [], action) => {
 export const PopularTvReducer = (state = [], action) => {
   switch (action.type) {
     case "POPULAR_TV":
-      return [...state, ...action.payload];
+      return [...action.payload];
     default:
-      return state;
+      return [...state];
   }
 };

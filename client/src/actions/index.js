@@ -233,6 +233,7 @@ export const fetchPopularTvShows = () => {
       rating: obj.vote_average,
       rating_count: obj.vote_count,
     }));
+    console.log(modifiedData);
     dispatch({ type: "POPULAR_TV", payload: modifiedData });
   };
 };
