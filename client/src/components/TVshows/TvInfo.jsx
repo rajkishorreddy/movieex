@@ -3,6 +3,10 @@ import {
   fetchFullTvDetails,
   fetchTvExternalIds,
   fetchTvVideos,
+  fetchTvCast,
+  fetchTvCrew,
+  fetchRecomendedTv,
+  fetchSimilarTv,
 } from "../../actions";
 import { connect } from "react-redux";
 import sprite from "../../assets/sprite.svg";
@@ -28,6 +32,10 @@ class TvInfo extends React.Component {
       await this.props.fetchFullTvDetails(this.props.match.params.id);
       await this.props.fetchTvExternalIds(this.props.match.params.id);
       await this.props.fetchTvVideos(this.props.match.params.id);
+      await this.props.fetchTvCast(this.props.match.params.id);
+      await this.props.fetchTvCrew(this.props.match.params.id);
+      await this.props.fetchRecomendedTv(this.props.match.params.id);
+      await this.props.fetchSimilarTv(this.props.match.params.id);
     };
     fetchapi();
   }
@@ -58,6 +66,86 @@ class TvInfo extends React.Component {
               <div className="ses-rating">{mv.name}</div>
               <div className="ses-rating">EP : {mv.episode_count}</div>
               <div className="ses-rating">{mv.air_date}</div>
+            </div>
+          </Link>
+        );
+      });
+    }
+  }
+  renderCrew() {
+    if (!this.props.crew) return <div>Loading...</div>;
+    if (this.props.fullDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      this.crewList = this.props.crew.map((mv) => (
+        <div key={mv.credit_id} className="cast-element">
+          <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
+          <div className="cast-char">{mv.name}</div>
+          <div className="cast-char">{mv.job}</div>
+          <div className="cast-name">
+            {/* <span className="cast-small">department: </span> */}
+            {mv.department}
+          </div>
+        </div>
+      ));
+    }
+  }
+  renderCast() {
+    if (!this.props.cast) return <div>Loading...</div>;
+    if (this.props.fullDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      this.castList = this.props.cast.map((mv) => (
+        <div key={mv.credit_id} className="cast-element">
+          <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
+          <div className="cast-char">
+            <span className="cast-small"> charactor: </span>
+            {mv.character}
+          </div>
+          <div className="cast-name">
+            <span className="cast-small">Original: </span>
+            {mv.name}
+          </div>
+          <div className="cast-name">
+            <span className="cast-small">Total EP: </span>
+            {mv.total_ep}
+          </div>
+        </div>
+      ));
+    }
+  }
+  renderRecomendedTv() {
+    if (!this.props.recomended) {
+      return <div>Loading...</div>;
+    }
+    if (this.props.fullDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      this.recomended = this.props.recomended.map((mv) => {
+        return (
+          <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+            <div className="tprated-element">
+              <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+              <div className="tprated-rating">{mv.rating}</div>
+            </div>
+          </Link>
+        );
+      });
+    }
+  }
+  renderSimilarTv() {
+    if (!this.props.similar) {
+      return <div>Loading...</div>;
+    }
+    if (this.props.fullDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      this.similar = this.props.similar.map((mv) => {
+        return (
+          <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+            <div className="tprated-element">
+              <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+              <div className="tprated-rating">{mv.rating}</div>
             </div>
           </Link>
         );
@@ -133,7 +221,7 @@ class TvInfo extends React.Component {
                   <use xlinkHref={`${sprite}#icon-twitter`}></use>
                 </svg>
               </a>
-              <div className="info-visite-msg">visit official movie pages</div>
+              <div className="info-visite-msg">visit official TVshow pages</div>
             </div>
             <div className="info-genre">{this.renderGenre()}</div>
             <div className="info-money">
@@ -154,7 +242,7 @@ class TvInfo extends React.Component {
               </div>
             </div>
             <a href={mv.homepage} className="info-link">
-              VISIT HOME PAGE OF THIS MOVIE
+              VISIT HOME PAGE OF THIS TVshow
             </a>
             <div className="info-rating">Rating : {mv.rating}</div>
           </div>
@@ -199,7 +287,17 @@ class TvInfo extends React.Component {
             </div>
           </div>
           <ListContainer title={"Season List "} list={this.SeasonList} />
-
+          <ListContainer title={"CAST"} list={this.castList} />
+          <ListContainer title={"CREW"} list={this.crewList} />
+          {this.props.recomended.length ? (
+            <ListContainer
+              title={"Recomended TVshows"}
+              list={this.recomended}
+            />
+          ) : null}
+          {this.props.similar.length ? (
+            <ListContainer title={"Similar TVshows"} list={this.similar} />
+          ) : null}
           <ModalVideo
             channel="youtube"
             autoplay
@@ -211,8 +309,13 @@ class TvInfo extends React.Component {
       );
     }
   }
+
   render() {
     this.renderSeasons();
+    this.renderCast();
+    this.renderCrew();
+    this.renderRecomendedTv();
+    this.renderSimilarTv();
     return (
       <React.Fragment>
         {this.renderBody()}
@@ -229,10 +332,18 @@ const mapStateToProps = (state) => {
     fullDetails: state.fullTvDetails,
     extIds: state.tvExtIds,
     videos: state.tvVideos,
+    cast: state.tvCast,
+    crew: state.tvCrew,
+    recomended: state.recomendedTv,
+    similar: state.similarTv,
   };
 };
 export default connect(mapStateToProps, {
   fetchFullTvDetails,
   fetchTvExternalIds,
   fetchTvVideos,
+  fetchTvCast,
+  fetchTvCrew,
+  fetchRecomendedTv,
+  fetchSimilarTv,
 })(TvInfo);

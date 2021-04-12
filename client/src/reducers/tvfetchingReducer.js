@@ -121,3 +121,36 @@ export const TvVideoReducer = (nowplaying = [], action) => {
       return [...nowplaying];
   }
 };
+export const TVCastReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "TV_CAST":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+export const TVCrewReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "TV_CREW":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+
+export const RecomendedTvReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "RECOMENDED_TV":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};
+export const SimilarTvReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "SIMILAR_TV":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};

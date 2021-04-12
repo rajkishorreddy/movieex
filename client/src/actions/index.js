@@ -16,16 +16,109 @@ const trendingPersons = `${url}/trending/person/week`;
 //   console.log(data);
 // };213
 const test = async () => {
-  const { data } = await axios.get(`https://api.themoviedb.org/3/tv/1399`, {
-    params: {
-      api_key: apiKey,
-      language: "en_US",
-    },
-  });
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/tv/63174/recommendations`,
+    {
+      params: {
+        api_key: apiKey,
+        language: "en_US",
+      },
+    }
+  );
   console.log(data);
 };
 test();
+export const fetchSimilarTv = (ID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${ID}/similar`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
 
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      title: obj.name,
+      poster: posterUrl + obj.poster_path,
+      rating: obj.vote_average,
+    }));
+    dispatch({ type: "SIMILAR_TV", payload: modifiedData });
+  };
+};
+export const fetchRecomendedTv = (ID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${ID}/recommendations`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      title: obj.name,
+      poster: posterUrl + obj.poster_path,
+      rating: obj.vote_average,
+    }));
+    dispatch({ type: "RECOMENDED_TV", payload: modifiedData });
+  };
+};
+export const fetchTvCast = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${id}/aggregate_credits`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = data.cast.slice(0, 40).map((el) => ({
+      // cast_id: el.cast_id,
+      character: el.roles[0].character,
+      id: el.id,
+      credit_id: el.roles[0].credit_id,
+      name: el.name,
+      profileimg: posterUrl + el.profile_path,
+      total_ep: el.total_episode_count,
+    }));
+
+    dispatch({ type: "TV_CAST", payload: modData });
+  };
+};
+export const fetchTvCrew = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${id}/aggregate_credits`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = data.crew.slice(0, 40).map((el) => ({
+      department: el.department,
+      job: el.jobs[0].job,
+      id: el.id,
+      name: el.name,
+      credit_id: el.jobs[0].credit_id,
+      profileimg: posterUrl + el.profile_path,
+    }));
+
+    dispatch({ type: "TV_CREW", payload: modData });
+  };
+};
 export const fetchTvVideos = (ID) => {
   return async (dispatch) => {
     const { data } = await axios.get(

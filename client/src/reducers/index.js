@@ -38,6 +38,10 @@ import {
   FullTvReducer,
   TvExtIdsReducer,
   TvVideoReducer,
+  TVCastReducer,
+  TVCrewReducer,
+  RecomendedTvReducer,
+  SimilarTvReducer,
 } from "./tvfetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -77,4 +81,8 @@ export default combineReducers({
   fullTvDetails: FullTvReducer,
   tvExtIds: TvExtIdsReducer,
   tvVideos: TvVideoReducer,
+  tvCast: TVCastReducer,
+  tvCrew: TVCrewReducer,
+  recomendedTv: RecomendedTvReducer,
+  similarTv: SimilarTvReducer,
 });
