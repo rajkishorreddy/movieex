@@ -14,10 +14,6 @@ import { Carousel } from "react-responsive-carousel";
 import ListContainer from "./Listcontainer";
 import { Link } from "react-router-dom";
 class MovieBody extends React.Component {
-  constructor(props) {
-    super(props);
-    this.carouselbox = React.createRef();
-  }
   componentDidMount() {
     const fetchapi = async () => {
       // await this.props.fetchGenre();
@@ -151,7 +147,6 @@ class MovieBody extends React.Component {
             autoPlay={true}
             showThumbs={false}
             interval={2000}
-            autoFocus={true}
             showStatus={false}
             stopOnHover={false}
           >

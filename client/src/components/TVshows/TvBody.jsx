@@ -7,23 +7,27 @@ import { Link } from "react-router-dom";
 import ListContainer from "../movies/Listcontainer";
 import {
   fetchHboTvShows,
-  fetchHboMaxTvShows,
   fetchHotstarTvShows,
   fetchAmazonTvShows,
   fetchNetflixTvShows,
   fetchPopularTvShows,
   fetchTvShowsMostVoted,
+  fetchTrendingTvshows,
 } from "../../actions";
 class TvBody extends React.Component {
+  constructor(props) {
+    super(props);
+    this.carouselbox = React.createRef();
+  }
   componentDidMount() {
     const fetchapi = async () => {
+      await this.props.fetchTvShowsMostVoted();
       await this.props.fetchHboTvShows();
-      await this.props.fetchHboMaxTvShows();
       await this.props.fetchHotstarTvShows();
       await this.props.fetchAmazonTvShows();
       await this.props.fetchNetflixTvShows();
       await this.props.fetchPopularTvShows();
-      await this.props.fetchTvShowsMostVoted();
+      await this.props.fetchTrendingTvshows();
     };
     fetchapi();
   }
@@ -31,7 +35,7 @@ class TvBody extends React.Component {
     if (!this.props.mostvoted) {
       return <div>Loading...</div>;
     }
-    return this.props.mostvoted.slice(0, 10).map((mv) => {
+    return this.props.mostvoted.slice(0, 10).map((mv, i) => {
       return (
         <div
           key={mv.id}
@@ -47,9 +51,10 @@ class TvBody extends React.Component {
           <div className="slide-release make-white">
             Release Date: {mv.release}
           </div>
-          {/* {mv.rating >= 7.5 ? (
-            <div className="slide-reco">movieex recommended</div>
-          ) : null} */}
+
+          {i === 0 ? (
+            <div className="slide-alert">Click me once to start slide show</div>
+          ) : null}
         </div>
       );
     });
@@ -69,21 +74,7 @@ class TvBody extends React.Component {
       );
     });
   }
-  renderhbomax() {
-    if (!this.props.hbomax) {
-      return <div>Loading...</div>;
-    }
-    this.hbomax = this.props.hbomax.map((mv) => {
-      return (
-        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
-          <div className="tprated-element">
-            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
-            <div className="tprated-rating">{mv.rating}</div>
-          </div>
-        </Link>
-      );
-    });
-  }
+
   renderhotstar() {
     if (!this.props.hotstar) {
       return <div>Loading...</div>;
@@ -159,24 +150,37 @@ class TvBody extends React.Component {
       );
     });
   }
+  rendertrending() {
+    if (!this.props.trending) {
+      return <div>Loading...</div>;
+    }
+    this.trending = this.props.trending.reverse().map((mv) => {
+      return (
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
+          <div className="tprated-element">
+            <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
+            <div className="tprated-rating">{mv.rating}</div>
+          </div>
+        </Link>
+      );
+    });
+  }
   render() {
     this.renderHbo();
-    this.renderhbomax();
     this.renderhotstar();
     this.renderamazon();
     this.rendernetflix();
     this.rendermostvoted();
     this.renderpopular();
+    this.rendertrending();
     return (
       <div>
-        {" "}
         <div className="slider">
           <Carousel
             infiniteLoop={true}
             autoPlay={true}
             showThumbs={false}
             interval={2000}
-            autoFocus={true}
             showStatus={false}
             stopOnHover={false}
           >
@@ -187,9 +191,13 @@ class TvBody extends React.Component {
         <ListContainer title={"Popular on PRIME VIDEO"} list={this.amazon} />
         <ListContainer title={"Popular on HOTSTAR"} list={this.hotstar} />
         <ListContainer title={"Popular on HBO"} list={this.hbo} />
-        <ListContainer title={"Popular on HBOMAX"} list={this.hbomax} />
         <ListContainer title={"Most voted"} list={this.mostvoted} />
         <ListContainer title={"Popular on movieex"} list={this.popular} />
+        <ListContainer title={"Trending this week"} list={this.trending} />
+        <div className="quote">
+          “I'm not in the meth business. I'm in the empire business.”{" "}
+          <span className="quote-small">– WALTER WHITE</span>
+        </div>
       </div>
     );
   }
@@ -198,22 +206,24 @@ class TvBody extends React.Component {
 const mapStateToProps = (state) => {
   return {
     hbo: state.hbotv,
-    hbomax: state.hbomaxtv,
+
     hotstar: state.hotstartv,
     amazon: state.amazontv,
     netflix: state.netflixtv,
     topRated: state.topRatedTv,
     popular: state.PopularTv,
     mostvoted: state.mostvotedtv,
+    trending: state.trendingTv,
   };
 };
 
 export default connect(mapStateToProps, {
   fetchHboTvShows,
-  fetchHboMaxTvShows,
+
   fetchHotstarTvShows,
   fetchAmazonTvShows,
   fetchNetflixTvShows,
   fetchPopularTvShows,
   fetchTvShowsMostVoted,
+  fetchTrendingTvshows,
 })(TvBody);

@@ -31,6 +31,10 @@ import {
   MostVotedTvReducer,
   PopularTvReducer,
   TopRatedTvReducer,
+  SearchTvReducer,
+  TrendingTvReducer,
+  GenreListTVReducer,
+  GenreTVReducer,
 } from "./tvfetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -63,4 +67,8 @@ export default combineReducers({
   mostvotedtv: MostVotedTvReducer,
   PopularTv: PopularTvReducer,
   topRatedTv: TopRatedTvReducer,
+  searchedTv: SearchTvReducer,
+  trendingTv: TrendingTvReducer,
+  genreListTv: GenreListTVReducer,
+  genreTvshows: GenreTVReducer,
 });

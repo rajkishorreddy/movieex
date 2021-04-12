@@ -1,3 +1,21 @@
 .make-white {
   color: rgba(255, 255, 255, 0.479) !important;
 }
+.slide-alert {
+  color: white;
+  position: absolute;
+  font-size: 1.2rem;
+  width: 6rem;
+  right: 2rem;
+  top: 45%;
+  animation: background 1s infinite;
+  border-radius: 1rem;
+}
+@keyframes background {
+  0% {
+    background: none;
+  }
+  100% {
+    background: rgba(255, 255, 255, 0.274);
+  }
+}

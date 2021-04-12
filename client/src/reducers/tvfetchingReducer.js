@@ -62,3 +62,37 @@ export const PopularTvReducer = (state = [], action) => {
       return [...state];
   }
 };
+
+export const SearchTvReducer = (state = [], action) => {
+  switch (action.type) {
+    case "SEARCHED_TV":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+export const TrendingTvReducer = (state = [], action) => {
+  switch (action.type) {
+    case "TRENDING_TV":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+export const GenreListTVReducer = (state = [], action) => {
+  switch (action.type) {
+    case "GENRE_LIST_TV":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+
+export const GenreTVReducer = (state = [], action) => {
+  switch (action.type) {
+    case "GENRE_TV":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
