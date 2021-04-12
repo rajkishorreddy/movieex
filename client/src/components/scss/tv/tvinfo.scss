@@ -1,0 +1,87 @@
+.info {
+  &-stream-logo {
+    width: 13rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.205);
+    @media only screen and (max-width: 30em) {
+      bottom: 5rem;
+    }
+  }
+  &-status {
+    position: absolute;
+    color: #ddd;
+    font-size: 1.5rem;
+    padding: 1rem;
+    font-weight: 700;
+  }
+  &-date {
+    top: 2.5rem;
+    left: 0;
+    font-size: 1.1rem;
+  }
+  &-prod {
+    color: white;
+    position: absolute;
+    top: 7rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+  }
+  &-createdby {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-left: 5rem;
+    &-title {
+      font-size: 3rem;
+      padding: 1rem;
+      color: #ddd;
+      font-weight: 500;
+    }
+    &-container {
+      background: #111;
+    }
+    &-el {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1rem;
+      transition: all 0.5s;
+      &:hover {
+        transform: scale(1.15);
+      }
+    }
+    &-img {
+      width: 10rem;
+      border-radius: 2rem;
+    }
+    &-logo {
+      width: 4rem;
+    }
+    &-name {
+      font-size: 1.5rem;
+      color: #eee;
+    }
+  }
+}
+.ses {
+  &-element {
+    margin: 2rem;
+    transition: all 0.5s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &-img {
+    border-radius: 1rem;
+    width: 15rem;
+  }
+  &-rating {
+    color: rgba(255, 255, 255, 0.61);
+    font-size: 1.3rem;
+  }
+}

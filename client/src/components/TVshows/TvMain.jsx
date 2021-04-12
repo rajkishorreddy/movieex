@@ -6,6 +6,7 @@ import sprite from "../../assets/sprite.svg";
 import TvBody from "./TvBody";
 import TvSearch from "./TvSearch";
 import TvGenre from "./TvGenre";
+import TvInfo from "./TvInfo";
 const TvMain = () => {
   let { path } = useRouteMatch();
   return (
@@ -24,12 +25,10 @@ const TvMain = () => {
         </div>
       </div>
       <Switch>
-        {/* <Route
+        <Route
           path={`${path}/info/:id`}
-          render={(props) => (
-            <MovieInfo key={props.match.params.id} {...props} />
-          )}
-        /> */}
+          render={(props) => <TvInfo key={props.match.params.id} {...props} />}
+        />
         <Route path={`${path}/search`} component={TvSearch} />
         <Route path={`${path}/genre`} component={TvGenre} />
         <Route path={`${path}/`} component={TvBody} />

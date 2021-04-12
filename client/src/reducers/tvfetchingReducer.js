@@ -96,3 +96,28 @@ export const GenreTVReducer = (state = [], action) => {
       return [...state];
   }
 };
+export const FullTvReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "FULL_TV":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
+  }
+};
+export const TvExtIdsReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "TV_EXTIDS":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
+  }
+};
+
+export const TvVideoReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "TV_VIDEO":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};

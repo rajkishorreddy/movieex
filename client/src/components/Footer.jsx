@@ -33,8 +33,8 @@ const Footer = () => {
         </div>
         <div className="footer-right">
           <div className="footer-nav">
-            <span>about movieex</span>
-            <span>contact us</span>
+            <h4>about movieex</h4>
+            <h4>contact us</h4>
           </div>
           <div className="footer-thanku">Thank you for visiting us!</div>
         </div>

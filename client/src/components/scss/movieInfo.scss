@@ -45,7 +45,7 @@
     top: 18rem;
     left: 5rem;
     padding: 0.5rem;
-
+    min-width: 40rem;
     &:after {
       content: "";
       position: absolute;
@@ -65,6 +65,9 @@
     position: absolute;
     bottom: -3rem;
     right: 8rem;
+    @media only screen and (max-width: 30em) {
+      bottom: -5rem;
+    }
   }
   &-money {
     position: absolute;
@@ -73,6 +76,9 @@
     left: 5rem;
     font-weight: 500;
     color: #eee;
+    @media only screen and (max-width: 30em) {
+      bottom: 15rem;
+    }
     &-budget {
       margin: 1rem;
     }
@@ -170,6 +176,10 @@
       height: 5rem;
       margin: 2rem;
       fill: #ff0000;
+    }
+    @media only screen and (max-width: 30em) {
+      bottom: 14rem;
+      left: 25rem;
     }
   }
   &-extids {

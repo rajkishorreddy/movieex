@@ -48,7 +48,7 @@ class MovieInfo extends React.Component {
     };
     fetchapi();
 
-    console.log(this.props.match.params.id);
+    // console.log(this.props.match.params.id);
   }
   renderGenre() {
     if (!this.props.movieDetails) return null;

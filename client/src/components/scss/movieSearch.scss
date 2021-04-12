@@ -17,13 +17,16 @@
     border: none;
     transition: all 0.5s;
     background: rgba(255, 255, 255, 0.267);
-    @media only screen and (max-width: 26em) {
-      width: 40rem;
+    @media only screen and (max-width: 30em) {
+      width: 70%;
       margin-right: 0;
     }
     &:focus {
       outline: none;
       width: 60%;
+      @media only screen and (max-width: 30em) {
+        width: 75%;
+      }
     }
   }
 }
@@ -51,4 +54,8 @@
   bottom: 0;
   color: rgba(255, 255, 255, 0.178);
   font-size: 1.2rem;
+  @media only screen and (max-width: 30em) {
+    bottom: none;
+    top: -3rem;
+  }
 }

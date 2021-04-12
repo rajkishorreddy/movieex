@@ -6,7 +6,7 @@
   justify-content: space-between;
   width: 100%;
   overflow: hidden;
-  @media only screen and (max-width: 26em) {
+  @media only screen and (max-width: 30em) {
     padding: 0;
     align-items: start;
     min-height: 11vh;
@@ -19,17 +19,17 @@
     border-radius: 5rem;
     font-size: 1.3rem;
     margin-right: 2rem;
-    @media only screen and (max-width: 26em) {
-      width: 30rem;
+    @media only screen and (max-width: 30em) {
+      width: 25rem;
       font-size: 1.9rem;
-      margin: 0.5rem;
+      margin: 1rem 0.5rem 0.5rem 0.5rem;
     }
   }
   &-dispflex {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @media only screen and (max-width: 26em) {
+    @media only screen and (max-width: 30em) {
       height: 7vh;
       flex-direction: column;
     }
@@ -42,8 +42,8 @@
     border-radius: 5rem;
     font-size: 1.3rem;
     margin-right: 2rem;
-    @media only screen and (max-width: 26em) {
-      width: 30rem;
+    @media only screen and (max-width: 30em) {
+      width: 25rem;
       font-size: 1.9rem;
       margin: 0.5rem;
     }
@@ -56,8 +56,9 @@
     @media only screen and (max-width: 36.5em) {
       margin-left: 0;
     }
-    @media only screen and (max-width: 26em) {
+    @media only screen and (max-width: 30em) {
       margin-top: 3rem;
+      margin-left: 1rem;
     }
   }
   &-input {

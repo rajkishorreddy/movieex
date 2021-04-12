@@ -16,7 +16,7 @@ const trendingPersons = `${url}/trending/person/week`;
 //   console.log(data);
 // };213
 const test = async () => {
-  const { data } = await axios.get(`https://api.themoviedb.org/3//tv/66732`, {
+  const { data } = await axios.get(`https://api.themoviedb.org/3/tv/1399`, {
     params: {
       api_key: apiKey,
       language: "en_US",
@@ -25,6 +25,85 @@ const test = async () => {
   console.log(data);
 };
 test();
+
+export const fetchTvVideos = (ID) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${ID}/videos`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      key: obj.key,
+      name: obj.name,
+      type: obj.type,
+    }));
+    dispatch({ type: "TV_VIDEO", payload: modifiedData });
+  };
+};
+export const fetchTvExternalIds = (movie_id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${movie_id}/external_ids`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    // console.log(data);
+    dispatch({ type: "TV_EXTIDS", payload: data });
+  };
+};
+export const fetchFullTvDetails = (movie_id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${movie_id}`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = {
+      backimg: posterUrl + data.backdrop_path,
+      created_by: data.created_by,
+      runtime: data.episode_run_time,
+      first_air_date: data.first_air_date,
+      genres: data.genres,
+      homepage: data.homepage,
+      id: data.id,
+      in_prod: data.in_production,
+      last_air_date: data.last_air_date,
+      name: data.name,
+      networks: data.networks,
+      next_ep_to_air: data.next_episode_to_air,
+      no_of_ep: data.number_of_episodes,
+      no_of_seasons: data.number_of_seasons,
+      language: data.original_language,
+      overview: data.overview,
+      posterimg: data.poster_path,
+      productionCompanies: data.production_companies,
+      seasons: data.seasons,
+      status: data.status,
+      tagline: data.tagline,
+      type: data.type,
+      rating: data.vote_average,
+      rating_count: data.vote_count,
+    };
+    console.log(modData);
+
+    dispatch({ type: "FULL_TV", payload: modData });
+  };
+};
 export const fetchTvShowsByGenre = (genreID, page) => {
   return async (dispatch) => {
     const { data } = await axios.get(
