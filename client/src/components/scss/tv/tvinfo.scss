@@ -60,7 +60,7 @@
       border-radius: 2rem;
     }
     &-logo {
-      width: 4rem;
+      width: 7rem;
     }
     &-name {
       font-size: 1.5rem;
@@ -84,4 +84,20 @@
     color: rgba(255, 255, 255, 0.61);
     font-size: 1.3rem;
   }
+}
+.ov-item-logo {
+  width: 6rem;
+  border-radius: 3rem;
+}
+.ov-streamon {
+  font-size: 2rem;
+  margin: 2rem;
+}
+.ov-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ov-stream {
+  display: flex;
 }

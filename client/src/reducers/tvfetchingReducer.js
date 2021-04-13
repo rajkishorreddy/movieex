@@ -154,3 +154,11 @@ export const SimilarTvReducer = (nowplaying = [], action) => {
       return [...nowplaying];
   }
 };
+export const TvFlatReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "TV_FLAT":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};

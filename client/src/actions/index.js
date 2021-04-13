@@ -17,7 +17,7 @@ const trendingPersons = `${url}/trending/person/week`;
 // };213
 const test = async () => {
   const { data } = await axios.get(
-    `https://api.themoviedb.org/3/tv/63174/recommendations`,
+    `https://api.themoviedb.org/3/tv/1396/season/1`,
     {
       params: {
         api_key: apiKey,
@@ -28,6 +28,27 @@ const test = async () => {
   console.log(data);
 };
 test();
+export const fetchTvFlatrate = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${id}/watch/providers`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    let modData = data.results.IN?.flatrate?.map((el) => ({
+      id: el.provider_id,
+      logo: posterUrl + el.logo_path,
+      name: el.provider_name,
+    }));
+    if (!modData) modData = [];
+
+    dispatch({ type: "TV_FLAT", payload: modData });
+  };
+};
 export const fetchSimilarTv = (ID) => {
   return async (dispatch) => {
     const { data } = await axios.get(

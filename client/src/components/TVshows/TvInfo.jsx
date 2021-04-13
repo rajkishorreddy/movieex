@@ -7,6 +7,7 @@ import {
   fetchTvCrew,
   fetchRecomendedTv,
   fetchSimilarTv,
+  fetchTvFlatrate,
 } from "../../actions";
 import { connect } from "react-redux";
 import sprite from "../../assets/sprite.svg";
@@ -31,11 +32,13 @@ class TvInfo extends React.Component {
     const fetchapi = async () => {
       await this.props.fetchFullTvDetails(this.props.match.params.id);
       await this.props.fetchTvExternalIds(this.props.match.params.id);
+      await this.props.fetchTvFlatrate(this.props.match.params.id);
       await this.props.fetchTvVideos(this.props.match.params.id);
       await this.props.fetchTvCast(this.props.match.params.id);
       await this.props.fetchTvCrew(this.props.match.params.id);
       await this.props.fetchRecomendedTv(this.props.match.params.id);
       await this.props.fetchSimilarTv(this.props.match.params.id);
+      await this.props.fetchTvFlatrate(this.props.match.params.id);
     };
     fetchapi();
   }
@@ -152,6 +155,28 @@ class TvInfo extends React.Component {
       });
     }
   }
+  renderStreamon() {
+    if (!this.props.stream) {
+      return <div>Loading...</div>;
+    }
+    if (this.props.fullDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      return (
+        <div className="ov-stream">
+          <div className="ov-streamon">Stream on</div>
+          <div className="ov-item">
+            <img
+              className="ov-item-logo"
+              src={this.props.stream[0]?.logo}
+              alt={this.props.stream[0]?.name}
+            ></img>
+            <div className="ov-item-name">{this.props.stream[0]?.name}</div>
+          </div>
+        </div>
+      );
+    }
+  }
   renderBody() {
     if (!this.props.fullDetails) return <div>Loading...</div>;
     if (this.props.fullDetails.id !== Number(this.props.match.params.id)) {
@@ -248,11 +273,11 @@ class TvInfo extends React.Component {
           </div>
           <div className="ov">
             <div className="ov-title">Overview</div>
-            <p className="ov-data">
-              {/* <span className="ov-relese">Released : {mv.relese}</span> */}
-              {/* <br /> */}
+            <div className="ov-data">
+              {this.renderStreamon()}
+              <br />
               {mv.overview}
-            </p>
+            </div>
           </div>
           <div className="info-createdby-container">
             <div className="info-createdby-title">Created by</div>
@@ -336,6 +361,7 @@ const mapStateToProps = (state) => {
     crew: state.tvCrew,
     recomended: state.recomendedTv,
     similar: state.similarTv,
+    stream: state.tvstream,
   };
 };
 export default connect(mapStateToProps, {
@@ -346,4 +372,5 @@ export default connect(mapStateToProps, {
   fetchTvCrew,
   fetchRecomendedTv,
   fetchSimilarTv,
+  fetchTvFlatrate,
 })(TvInfo);

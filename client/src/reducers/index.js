@@ -42,6 +42,7 @@ import {
   TVCrewReducer,
   RecomendedTvReducer,
   SimilarTvReducer,
+  TvFlatReducer,
 } from "./tvfetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -85,4 +86,5 @@ export default combineReducers({
   tvCrew: TVCrewReducer,
   recomendedTv: RecomendedTvReducer,
   similarTv: SimilarTvReducer,
+  tvstream: TvFlatReducer,
 });
