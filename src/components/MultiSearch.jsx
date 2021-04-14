@@ -113,7 +113,7 @@ function MultiSearch(props) {
         <Link to="/">
           <img src={logo} alt="logo" className="mvhdr-logo" />
         </Link>
-
+      <div className="errmgg">if searched and not found plz check the spelling !</div>
         <form onSubmit={onSubmit} className="mvhdr-form">
           <input
             className="mvhdr-input"

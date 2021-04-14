@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./scss/header.scss";
 import { Link } from "react-router-dom";
 import history from "../history";
@@ -6,11 +6,41 @@ import bgheader from "../assets/bgheader.mp4";
 import logoName from "../assets/logoname.png";
 import jokerTitle from "../assets/jokerTitle.png";
 import primeVideo from "../assets/primeVideo.png";
+import { GoogleLogin } from "react-google-login";
+import { setuseraction, logoutUserAction } from "../actions";
+import { connect } from "react-redux";
+import googleIcon from "../assets/googleIcon.png";
+import axios from "axios";
 const Header = (props) => {
   const [term, setTerm] = useState("");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  console.log(user);
   const onSubmit = (e) => {
     e.preventDefault();
     history.push(`/multi/${term}`);
+  };
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [props.uuu]);
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+    await props.setuseraction({ result, token });
+    axios({
+      method: "post",
+      url: "https://movieex.herokuapp.com/api/users/signup",
+      data: {
+        name: result.name,
+        email: result.email,
+      },
+    });
+  };
+  const googleFailure = (err) => {
+    console.log(err);
+  };
+  const logoutclick = () => {
+    props.logoutUserAction();
+    setUser(null);
   };
   return (
     <div className="main-header">
@@ -26,13 +56,38 @@ const Header = (props) => {
           <Link to="/people" className="header-nav-item header-nav-item-3">
             People
           </Link>
-          <Link to="/login" className="header-nav-item header-nav-item-4">
-            Login
-          </Link>
-          <Link to="/signup" className="header-nav-item header-nav-item-5 ">
-            Signup
-          </Link>
         </nav>
+        {!user ? (
+          <div className="header-login">
+            <GoogleLogin
+              clientId="587037560217-tmcfd3alkf2in9ea376edaansgbqco6c.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <button
+                  className="login-btn"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <img className="login-btn-icon" src={googleIcon} alt="g" />
+                  Login
+                </button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              // buttonText="login"
+              cookiePolicy="single_host_origin"
+            />
+          </div>
+        ) : (
+          <div className="header-right">
+            <div className="header-name">
+              <div>{user.result.givenName}</div>
+            </div>
+            <Link to="/" className="header-logout" onClick={logoutclick}>
+              Logout
+            </Link>
+            <div className="header-img">{user.result.givenName.charAt(0)}</div>
+          </div>
+        )}
       </div>
       <h2 className="welcome">welcome to</h2>
       <h1 className="movieex">movieex.</h1>
@@ -79,5 +134,9 @@ const Header = (props) => {
     </div>
   );
 };
-
-export default Header;
+const mapStateToProps = (state) => {
+  return { uuu: state.login };
+};
+export default connect(mapStateToProps, { setuseraction, logoutUserAction })(
+  Header
+);

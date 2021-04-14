@@ -29,6 +29,7 @@ import {
   PeopleExtIdsReducer,
   PeopleIMGReducer,
   SearchMultiReducer,
+  LoginReducer,
 } from "./fetchingReducer";
 import {
   HboTvReducer,
@@ -106,4 +107,5 @@ export default combineReducers({
   peopleext: PeopleExtIdsReducer,
   peopleimg: PeopleIMGReducer,
   multiRes: SearchMultiReducer,
+  login: LoginReducer,
 });

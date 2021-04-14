@@ -6,6 +6,22 @@
     height: 75vh;
   }
 }
+.login-btn {
+  background: none;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 1rem;
+  &-icon {
+    width: 3rem;
+    margin-right: 0.5rem;
+  }
+}
 .bg-video {
   position: absolute;
   top: 0;
@@ -23,9 +39,50 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 3rem;
+  margin-top: 2rem;
+  position: relative;
+  &-img {
+    background: green;
+    border-radius: 20rem;
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+  }
+  &-right {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 2rem;
+  }
+  &-login {
+    position: absolute;
+    right: 3rem;
 
+    @media only screen and (max-width: 30em) {
+      height: 4rem;
+      overflow: hidden;
+    }
+  }
+  &-logout {
+    color: white;
+    text-decoration: none;
+    font-size: 1.7rem;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border: 1px solid green;
+    border-radius: 2rem;
+    margin-left: 1rem;
+  }
+  &-name {
+    color: white;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    border: 1px solid green;
+    border-radius: 2rem;
+  }
   &-form {
     width: 43%;
     margin-right: 1rem;
@@ -56,24 +113,26 @@
   &-logo {
     height: 4rem;
     width: 12rem;
-    margin-left: 5rem;
+    margin-left: 2rem;
     @media only screen and (max-width: 30em) {
       margin-left: 1rem;
     }
   }
   &-nav {
     transition: all 0.5s;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     &-item {
       font-size: 1.7rem;
       background: none;
       color: white;
       font-weight: 700;
-      padding: 0.5rem;
+      padding: 0 0.5rem 0 0.5rem;
       text-decoration: none;
       color: white;
 
       &-3 {
-        margin-right: 5rem;
         @media only screen and (max-width: 30em) {
           display: none;
         }
@@ -81,18 +140,11 @@
       &-1,
       &-2 {
         margin-right: 1rem;
-        border-right: 1.5px solid rgb(2, 75, 2);
+        border-right: 2px solid rgb(2, 75, 2);
         padding-right: 1.5rem;
         @media only screen and (max-width: 30em) {
           display: none;
         }
-      }
-      &-4,
-      &-5 {
-        border: 2px solid rgb(2, 75, 2);
-        padding: 0.5rem 1rem 0.5rem 1rem;
-        border-radius: 2rem;
-        margin-right: 1rem;
       }
     }
   }

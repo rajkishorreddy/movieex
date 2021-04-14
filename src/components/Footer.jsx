@@ -2,7 +2,8 @@ import React from "react";
 import "./scss/footer.scss";
 import m2 from "../assets/m2.PNG";
 import sprite from "../assets/sprite.svg";
-const Footer = () => {
+
+const Footer = (props) => {
   return (
     <div className="footer">
       <div className="footer-container">
@@ -42,4 +43,5 @@ const Footer = () => {
     </div>
   );
 };
+
 export default Footer;

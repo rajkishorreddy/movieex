@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const url = "https://api.themoviedb.org/3";
 const apiKey = "2afbb0d04ed94c81cd8858e0087a74fe";
 const nowPlayingMovieUrl = `${url}/movie/now_playing`;
@@ -42,6 +43,12 @@ const trendingPersons = `${url}/trending/person/week`;
 //   console.log(modifiedData);
 // };
 // test();
+export const logoutUserAction = () => {
+  return { type: "LOG_OUT" };
+};
+export const setuseraction = (obj) => {
+  return { type: "LOG_IN", payload: obj };
+};
 export const fetchMultiSearch = (name) => {
   return async (dispatch) => {
     const { data } = await axios.get(
