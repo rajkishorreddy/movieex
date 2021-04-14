@@ -174,8 +174,76 @@ export const GenreListReducer = (state = [], action) => {
 export const TrendingPeopleReducer = (state = [], action) => {
   switch (action.type) {
     case "TRENDING_PEOPLE":
-      return [...state, ...action.payload];
+      return [...action.payload];
     default:
-      return state;
+      return [...state];
+  }
+};
+export const PopularPeopleReducer = (state = [], action) => {
+  switch (action.type) {
+    case "POPULAR_PEOPLE":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+export const SearchPeopleReducer = (state = [], action) => {
+  switch (action.type) {
+    case "SEARCHED_PEOPLE":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+
+export const FullPeopleReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "FULL_PEOPLE":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
+  }
+};
+
+export const PeopleMovieReducer = (state = [], action) => {
+  switch (action.type) {
+    case "PEOPLE_MOVIE":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+export const PeopleTvReducer = (state = [], action) => {
+  switch (action.type) {
+    case "PEOPLE_TV":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+
+export const PeopleExtIdsReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "PEOPLE_EXTIDS":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
+  }
+};
+
+export const PeopleIMGReducer = (state = [], action) => {
+  switch (action.type) {
+    case "PEOPLE_IMG":
+      return [...action.payload];
+    default:
+      return [...state];
+  }
+};
+export const SearchMultiReducer = (state = [], action) => {
+  switch (action.type) {
+    case "SEARCHED_MULTI":
+      return [...action.payload];
+    default:
+      return [...state];
   }
 };

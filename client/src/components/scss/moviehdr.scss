@@ -61,6 +61,7 @@
       margin-left: 1rem;
     }
   }
+
   &-input {
     border: none;
     width: 35rem;
@@ -68,6 +69,7 @@
     // height: 3rem;
     @media only screen and (max-width: 36.5em) {
       margin-right: 0;
+      margin-top: 3rem;
     }
 
     padding: 0.8rem 1rem 0.8rem 1rem;
@@ -80,6 +82,9 @@
     &:focus {
       width: 40rem;
       outline: none;
+      @media only screen and (max-width: 30em) {
+        width: 35rem;
+      }
     }
   }
 }

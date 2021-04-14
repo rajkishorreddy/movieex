@@ -93,11 +93,9 @@ class TvGenre extends React.Component {
         ) : (
           <div className="genre-test">
             <div className="genre-test-quote">
-              “People want to see something that shows them you can do what you
-              say. That’s the trick.“{" "}
-              <span className="genre-test-quote-small">
-                – Christopher Nolan
-              </span>
+              I would rather entertain and hope that people learned something
+              than educate people and hope they were entertained.{" "}
+              <span className="genre-test-quote-small">– Walt Disney</span>
             </div>
           </div>
         )}

@@ -15,19 +15,274 @@ const trendingPersons = `${url}/trending/person/week`;
 //   );
 //   console.log(data);
 // };213
-const test = async () => {
-  const { data } = await axios.get(
-    `https://api.themoviedb.org/3/tv/1396/season/1`,
-    {
+// const test = async () => {
+//   const { data } = await axios.get(
+//     "https://api.themoviedb.org/3/search/multi",
+//     {
+//       params: {
+//         api_key: apiKey,
+//         language: "en_US",
+//         query: "emilia",
+//         page: 1,
+//         include_adults: true,
+//       },
+//     }
+//   );
+
+//   const posterUrl = "https://image.tmdb.org/t/p/original/";
+//   const modifiedData = data["results"].map((obj) => ({
+//     name: obj.name,
+//     title: obj.title,
+//     poster: posterUrl + obj.poster_path,
+//     id: obj.id,
+//     rating: obj.vote_average,
+//     media_type: obj.media_type,
+//     profile: posterUrl + obj.profile_path,
+//   }));
+//   console.log(modifiedData);
+// };
+// test();
+export const fetchMultiSearch = (name) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/search/multi",
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+          query: name,
+          page: 1,
+          include_adults: true,
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      name: obj.name,
+      title: obj.title,
+      poster: posterUrl + obj.poster_path,
+      id: obj.id,
+      rating: obj.vote_average,
+      media_type: obj.media_type,
+      release: obj.release_date,
+      firstAir: obj.first_air_date,
+      profile: posterUrl + obj.profile_path,
+    }));
+    console.log(modifiedData);
+    dispatch({ type: "SEARCHED_MULTI", payload: modifiedData });
+  };
+};
+export const fetchPeopleimgs = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/person/${id}/images`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data?.profiles?.slice(0, 30).map((obj) => ({
+      poster: posterUrl + obj.file_path,
+    }));
+    dispatch({ type: "PEOPLE_IMG", payload: modifiedData });
+  };
+};
+export const fetchPeopleExternalIds = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/person/${id}/external_ids`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    dispatch({ type: "PEOPLE_EXTIDS", payload: data });
+  };
+};
+export const fetchPeopleTvList = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/person/${id}/tv_credits`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data?.cast?.map((obj) => ({
+      id: obj.id,
+      credit_id: obj.credit_id,
+      title: obj.name,
+      character: obj.character,
+      rating: obj.vote_average,
+      relese: obj.first_air_date,
+      poster: posterUrl + obj.poster_path,
+    }));
+
+    dispatch({ type: "PEOPLE_TV", payload: modifiedData });
+  };
+};
+export const fetchPeopleMovieList = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/person/${id}/movie_credits`,
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data?.cast?.map((obj) => ({
+      id: obj.id,
+      credit_id: obj.credit_id,
+      title: obj.title,
+      character: obj.character,
+      rating: obj.vote_average,
+      relese: obj.release_date,
+      poster: posterUrl + obj.poster_path,
+    }));
+    dispatch({ type: "PEOPLE_MOVIE", payload: modifiedData });
+  };
+};
+export const fetchPeopleDetails = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/person/${id}`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modData = {
+      biography: data.biography,
+      birthday: data.birthday,
+      deathday: data.deathday,
+      homepage: data.homepage,
+      id: data.id,
+      department: data.department,
+      name: data.name,
+      placeOfBirth: data.place_of_birth,
+      profile: posterUrl + data.profile_path,
+    };
+    console.log(modData);
+    dispatch({ type: "FULL_PEOPLE", payload: modData });
+  };
+};
+export const fetchSearchedPeople = (name) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/search/person",
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+          query: name,
+          page: 1,
+          include_adults: true,
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      name: obj.name,
+      profile: posterUrl + obj.profile_path,
+      id: obj.id,
+    }));
+    dispatch({ type: "SEARCHED_PEOPLE", payload: modifiedData });
+  };
+};
+export const fetchPopularPeople = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      "https://api.themoviedb.org/3/person/popular",
+      {
+        params: {
+          api_key: apiKey,
+        },
+      }
+    );
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      name: obj.name,
+      poster: posterUrl + obj.profile_path,
+    }));
+    dispatch({ type: "POPULAR_PEOPLE", payload: modifiedData });
+  };
+};
+export const fetchTrendingPeople = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get(trendingPersons, {
       params: {
         api_key: apiKey,
-        language: "en_US",
       },
-    }
-  );
-  console.log(data);
+    });
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      name: obj.name,
+      poster: posterUrl + obj.profile_path,
+    }));
+    dispatch({ type: "TRENDING_PEOPLE", payload: modifiedData });
+  };
 };
-test();
+export const fetchEPVideos = (ID, sn) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${ID}/season/${sn}/videos`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+    const modifiedData = data["results"].map((obj) => ({
+      id: obj.id,
+      key: obj.key,
+      name: obj.name,
+      type: obj.type,
+    }));
+    dispatch({ type: "EP_VIDEO", payload: modifiedData });
+  };
+};
+export const fetchTvEpDetails = (ID, sno) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/tv/${ID}/season/${sno}`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en_US",
+        },
+      }
+    );
+
+    const posterUrl = "https://image.tmdb.org/t/p/original/";
+    const modifiedData = {
+      id: data.id,
+      title: data.name,
+      season_number: data.season_number,
+      episodes: data.episodes,
+      posterURL: posterUrl,
+      poster: posterUrl + data.poster_path,
+      relese: data.air_date,
+      overview: data.overview,
+    };
+    dispatch({ type: "EPDETAILS_TV", payload: modifiedData });
+  };
+};
 export const fetchTvFlatrate = (id) => {
   return async (dispatch) => {
     const { data } = await axios.get(
@@ -759,22 +1014,7 @@ export const fetchMovieExternalIds = (movie_id) => {
     dispatch({ type: "MOVIE_EXTIDS", payload: data });
   };
 };
-export const fetchTrendingPeople = () => {
-  return async (dispatch) => {
-    const { data } = await axios.get(trendingPersons, {
-      params: {
-        api_key: apiKey,
-      },
-    });
-    const posterUrl = "https://image.tmdb.org/t/p/original/";
-    const modifiedData = data["results"].map((obj) => ({
-      id: obj.id,
-      name: obj.name,
-      poster: posterUrl + obj.profile_path,
-    }));
-    dispatch({ type: "TRENDING_PEOPLE", payload: modifiedData });
-  };
-};
+
 export const fetchSearchedMovies = (mvname) => {
   return async (dispatch) => {
     const { data } = await axios.get(

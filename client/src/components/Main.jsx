@@ -7,7 +7,7 @@ import "./scss/main.scss";
 import { connect } from "react-redux";
 import {
   fetchNowPlayingMovies,
-  fetchTopRatedMovies,
+  fetchTrendingMovies,
   fetchGenre,
   fetchPopularTvShows,
   fetchTrendingPeople,
@@ -17,7 +17,7 @@ class Main extends React.Component {
     const fetchapi = async () => {
       await this.props.fetchGenre();
       await this.props.fetchNowPlayingMovies();
-      await this.props.fetchTopRatedMovies();
+      await this.props.fetchTrendingMovies();
       await this.props.fetchPopularTvShows();
       await this.props.fetchTrendingPeople();
     };
@@ -47,7 +47,7 @@ class Main extends React.Component {
       });
     }
   }
-  renderTopRatedMovies() {
+  fetchTrendingMovies() {
     if (!this.props.topRatedMovies) {
       return <div>Loading...</div>;
     } else {
@@ -123,8 +123,8 @@ class Main extends React.Component {
           </Link>
         </div>
         <div className="mvt">
-          <div className="mvt-heading">Top Rated Movies</div>
-          <div className="mvt-container">{this.renderTopRatedMovies()}</div>
+          <div className="mvt-heading">Trending Movies this week</div>
+          <div className="mvt-container">{this.fetchTrendingMovies()}</div>
           <Link to="/movies" className="mvt-footer">
             Explore more movies here !
           </Link>
@@ -132,16 +132,16 @@ class Main extends React.Component {
         <div className="mvt">
           <div className="mvt-heading">Popular TV shows</div>
           <div className="mvt-container">{this.renderPopularTvShows()}</div>
-          <a href="/movies" className="mvt-footer">
+          <Link to="/tvshows" className="mvt-footer">
             Explore more TV shows here !
-          </a>
+          </Link>
         </div>
         <div className="mvt">
           <div className="mvt-heading">Trending People this week</div>
           <div className="mvt-container">{this.renderTrendingPeople()}</div>
-          <a href="/movies" className="mvt-footer">
+          <Link to="/people" className="mvt-footer">
             Explore more People here !
-          </a>
+          </Link>
         </div>
         <Footer />
       </div>
@@ -151,7 +151,7 @@ class Main extends React.Component {
 const mapStateToProps = (state) => {
   return {
     nowPlayingMovies: state.nowPlayingMovies,
-    topRatedMovies: state.TopRatedMovies,
+    topRatedMovies: state.trendingMovie,
     genreList: state.genreList,
     PopularTv: state.PopularTv,
     trendingPeople: state.trendingPeople,
@@ -159,7 +159,7 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {
   fetchNowPlayingMovies,
-  fetchTopRatedMovies,
+  fetchTrendingMovies,
   fetchGenre,
   fetchPopularTvShows,
   fetchTrendingPeople,

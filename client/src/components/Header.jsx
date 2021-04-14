@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./scss/header.scss";
 import { Link } from "react-router-dom";
-// import history from "../history";
+import history from "../history";
 import bgheader from "../assets/bgheader.mp4";
 import logoName from "../assets/logoname.png";
 import jokerTitle from "../assets/jokerTitle.png";
 import primeVideo from "../assets/primeVideo.png";
-const Header = () => {
+const Header = (props) => {
+  const [term, setTerm] = useState("");
+  const onSubmit = (e) => {
+    e.preventDefault();
+    history.push(`/multi/${term}`);
+  };
   return (
     <div className="main-header">
       <div className="header">
@@ -31,8 +36,12 @@ const Header = () => {
       </div>
       <h2 className="welcome">welcome to</h2>
       <h1 className="movieex">movieex.</h1>
-      <form className="header-form">
+      <form onSubmit={onSubmit} className="header-form">
         <input
+          value={term}
+          onChange={(e) => {
+            setTerm(e.target.value);
+          }}
           className="header-form-input"
           type="text"
           placeholder="search for a movie,TVshow or people..."

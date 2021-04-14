@@ -1,0 +1,71 @@
+.multimv {
+  &-title {
+    color: #ddd;
+    background-color: #111;
+    font-size: 2.5rem;
+    padding: 1rem 2rem 2rem 2rem;
+  }
+}
+.multi-movie {
+  background: #111;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0rem 2rem 2rem 2rem;
+  justify-content: space-evenly;
+  min-height: 65vh;
+  &-item {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s;
+    &:hover {
+      transform: scale(1.15);
+    }
+    &-img {
+      width: 15rem;
+      margin: 2rem 2rem 0.5rem 2rem;
+      border-radius: 2rem;
+    }
+    &-title {
+      color: #ddd;
+      font-size: 1.5rem;
+    }
+    &-release {
+      color: rgba(221, 221, 221, 0.637);
+      font-size: 1.3rem;
+    }
+  }
+}
+.set-container {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  //   min-height: 8vh;
+  .btn-mv {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    border: 1px solid green;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    color: green;
+    margin: 0 1rem 0 1rem;
+    cursor: pointer;
+    &:active,
+    &:focus {
+      background: green;
+      color: #ddd;
+    }
+  }
+}
+.nores {
+  color: rgba(221, 221, 221, 0.5);
+  font-size: 3rem;
+}

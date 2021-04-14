@@ -162,3 +162,20 @@ export const TvFlatReducer = (nowplaying = [], action) => {
       return [...nowplaying];
   }
 };
+
+export const TvEPdetailsReducer = (nowplaying = {}, action) => {
+  switch (action.type) {
+    case "EPDETAILS_TV":
+      return { ...action.payload };
+    default:
+      return { ...nowplaying };
+  }
+};
+export const EPVideoReducer = (nowplaying = [], action) => {
+  switch (action.type) {
+    case "EP_VIDEO":
+      return [...action.payload];
+    default:
+      return [...nowplaying];
+  }
+};

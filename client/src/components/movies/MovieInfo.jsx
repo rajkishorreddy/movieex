@@ -79,17 +79,23 @@ class MovieInfo extends React.Component {
       return <div>fetching</div>;
     else {
       this.castList = this.props.cast.map((mv) => (
-        <div key={mv.credit_id} className="cast-element">
-          <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
-          <div className="cast-char">
-            <span className="cast-small"> charactor: </span>
-            {mv.character}
+        <Link
+          className="infolink"
+          to={`/people/info/${mv.id}`}
+          key={mv.credit_id}
+        >
+          <div key={mv.credit_id} className="cast-element">
+            <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
+            <div className="cast-char">
+              <span className="cast-small"> charactor: </span>
+              {mv.character}
+            </div>
+            <div className="cast-name">
+              <span className="cast-small">Original: </span>
+              {mv.name}
+            </div>
           </div>
-          <div className="cast-name">
-            <span className="cast-small">Original: </span>
-            {mv.name}
-          </div>
-        </div>
+        </Link>
       ));
     }
   }
@@ -114,15 +120,21 @@ class MovieInfo extends React.Component {
       return <div>fetching</div>;
     else {
       this.crewList = this.props.crew.map((mv) => (
-        <div key={mv.credit_id} className="cast-element">
-          <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
-          <div className="cast-char">{mv.name}</div>
-          <div className="cast-char">{mv.job}</div>
-          <div className="cast-name">
-            {/* <span className="cast-small">department: </span> */}
-            {mv.department}
+        <Link
+          className="infolink"
+          to={`/people/info/${mv.id}`}
+          key={mv.credit_id}
+        >
+          <div key={mv.credit_id} className="cast-element">
+            <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
+            <div className="cast-char">{mv.name}</div>
+            <div className="cast-char">{mv.job}</div>
+            <div className="cast-name">
+              {/* <span className="cast-small">department: </span> */}
+              {mv.department}
+            </div>
           </div>
-        </div>
+        </Link>
       ));
     }
   }

@@ -1,0 +1,88 @@
+.info-img-container {
+  width: 25%;
+  @media only screen and (max-width: 56.25em) {
+    width: 100%;
+  }
+}
+.info-pheader {
+  background: #111;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  &-extids {
+    &-link {
+      &-logo {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin: 1rem;
+        fill: white;
+        &-inst {
+          &:hover {
+            fill: #e1306c;
+          }
+        }
+        &-twitter {
+          &:hover {
+            fill: #1da1f2;
+          }
+        }
+        &-fb {
+          &:hover {
+            fill: #4267b2;
+          }
+        }
+      }
+    }
+  }
+  &-img {
+    width: 25rem;
+    border-radius: 3rem;
+    margin: 2rem;
+  }
+  &-detail {
+    width: 75%;
+    color: #ddd;
+    @media only screen and (max-width: 56.25em) {
+      width: 100%;
+    }
+  }
+  &-name {
+    font-size: 3rem;
+    font-weight: 500;
+    padding: 1rem;
+  }
+  &-birth-death {
+    display: flex;
+  }
+  &-birth {
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+  &-death {
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+  &-placeofbirth {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+  }
+  &-bio {
+    font-size: 1.4rem;
+    padding: 1rem;
+    line-height: 1.3;
+    @media only screen and (max-width: 30em) {
+      font-size: 1.6rem;
+    }
+  }
+}
+//in people search
+.perr {
+  color: rgba(221, 221, 221, 0.24);
+  font-size: 1.2rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  @media only screen and (max-width: 30em) {
+    left: 50%;
+  }
+}

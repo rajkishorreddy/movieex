@@ -21,6 +21,14 @@ import {
   SimilarMovieReducer,
   RecomendedMovieReducer,
   MovieVideoReducer,
+  PopularPeopleReducer,
+  SearchPeopleReducer,
+  FullPeopleReducer,
+  PeopleMovieReducer,
+  PeopleTvReducer,
+  PeopleExtIdsReducer,
+  PeopleIMGReducer,
+  SearchMultiReducer,
 } from "./fetchingReducer";
 import {
   HboTvReducer,
@@ -43,6 +51,8 @@ import {
   RecomendedTvReducer,
   SimilarTvReducer,
   TvFlatReducer,
+  TvEPdetailsReducer,
+  EPVideoReducer,
 } from "./tvfetchingReducer";
 export default combineReducers({
   nowPlayingMovies: nowPlayingMovieReducer,
@@ -51,8 +61,6 @@ export default combineReducers({
   boxOfficeMovie: boxOfficeMovieReducer,
   trendingMovie: TrendingMovieReducer,
   genreList: GenreListReducer,
-
-  trendingPeople: TrendingPeopleReducer,
   upCommingMovie: upCommingMovieReducer,
   genreMovies: GenreMovieReducer,
   fullMovieDetails: FullMovieReducer,
@@ -87,4 +95,15 @@ export default combineReducers({
   recomendedTv: RecomendedTvReducer,
   similarTv: SimilarTvReducer,
   tvstream: TvFlatReducer,
+  epdetails: TvEPdetailsReducer,
+  epvideo: EPVideoReducer,
+  searchedPeople: SearchPeopleReducer,
+  trendingPeople: TrendingPeopleReducer,
+  popularPeople: PopularPeopleReducer,
+  peopleDetail: FullPeopleReducer,
+  peoplemv: PeopleMovieReducer,
+  peopletv: PeopleTvReducer,
+  peopleext: PeopleExtIdsReducer,
+  peopleimg: PeopleIMGReducer,
+  multiRes: SearchMultiReducer,
 });

@@ -8,6 +8,8 @@ import {
   fetchRecomendedTv,
   fetchSimilarTv,
   fetchTvFlatrate,
+  fetchTvEpDetails,
+  fetchEPVideos,
 } from "../../actions";
 import { connect } from "react-redux";
 import sprite from "../../assets/sprite.svg";
@@ -21,6 +23,8 @@ class TvInfo extends React.Component {
     super();
     this.state = {
       isOpen: false,
+      isOpen2: false,
+      seasonNo: 1,
     };
     this.openModal = this.openModal.bind(this);
   }
@@ -28,6 +32,9 @@ class TvInfo extends React.Component {
   openModal() {
     this.setState({ isOpen: true });
   }
+  openModal2 = () => {
+    this.setState({ isOpen2: true });
+  };
   componentDidMount() {
     const fetchapi = async () => {
       await this.props.fetchFullTvDetails(this.props.match.params.id);
@@ -39,8 +46,24 @@ class TvInfo extends React.Component {
       await this.props.fetchRecomendedTv(this.props.match.params.id);
       await this.props.fetchSimilarTv(this.props.match.params.id);
       await this.props.fetchTvFlatrate(this.props.match.params.id);
+      await this.props.fetchTvEpDetails(this.props.match.params.id, 1);
     };
     fetchapi();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.epdetails.season_number !== this.state.seasonNo) {
+      const fetchapi = async () => {
+        await this.props.fetchTvEpDetails(
+          this.props.match.params.id,
+          this.state.seasonNo
+        );
+        await this.props.fetchEPVideos(
+          this.props.match.params.id,
+          this.state.seasonNo
+        );
+      };
+      fetchapi();
+    }
   }
   renderGenre() {
     if (!this.props.fullDetails) return null;
@@ -50,6 +73,9 @@ class TvInfo extends React.Component {
       </div>
     ));
   }
+  onSeasonClick = (id) => {
+    this.setState({ seasonNo: id });
+  };
   renderSeasons() {
     if (!this.props.fullDetails) {
       return <div>Loading...</div>;
@@ -59,18 +85,22 @@ class TvInfo extends React.Component {
     else {
       this.SeasonList = this.props.fullDetails.seasons.map((mv) => {
         return (
-          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
-            <div className="ses-element">
-              <img
-                src={"https://image.tmdb.org/t/p/original/" + mv.poster_path}
-                className="ses-img"
-                alt={mv.name}
-              ></img>
-              <div className="ses-rating">{mv.name}</div>
-              <div className="ses-rating">EP : {mv.episode_count}</div>
-              <div className="ses-rating">{mv.air_date}</div>
-            </div>
-          </Link>
+          // <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div
+            className="ses-element"
+            onClick={() => this.setState({ seasonNo: mv.season_number })}
+            key={mv.id}
+          >
+            <img
+              src={"https://image.tmdb.org/t/p/original/" + mv.poster_path}
+              className="ses-img"
+              alt={mv.name}
+            ></img>
+            <div className="ses-rating">{mv.name}</div>
+            <div className="ses-rating">EP : {mv.episode_count}</div>
+            <div className="ses-rating">{mv.air_date}</div>
+          </div>
+          // </Link>
         );
       });
     }
@@ -81,15 +111,21 @@ class TvInfo extends React.Component {
       return <div>fetching</div>;
     else {
       this.crewList = this.props.crew.map((mv) => (
-        <div key={mv.credit_id} className="cast-element">
-          <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
-          <div className="cast-char">{mv.name}</div>
-          <div className="cast-char">{mv.job}</div>
-          <div className="cast-name">
-            {/* <span className="cast-small">department: </span> */}
-            {mv.department}
+        <Link
+          className="infolink"
+          to={`/people/info/${mv.id}`}
+          key={mv.credit_id}
+        >
+          <div key={mv.credit_id} className="cast-element">
+            <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
+            <div className="cast-char">{mv.name}</div>
+            <div className="cast-char">{mv.job}</div>
+            <div className="cast-name">
+              {/* <span className="cast-small">department: </span> */}
+              {mv.department}
+            </div>
           </div>
-        </div>
+        </Link>
       ));
     }
   }
@@ -99,21 +135,27 @@ class TvInfo extends React.Component {
       return <div>fetching</div>;
     else {
       this.castList = this.props.cast.map((mv) => (
-        <div key={mv.credit_id} className="cast-element">
-          <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
-          <div className="cast-char">
-            <span className="cast-small"> charactor: </span>
-            {mv.character}
+        <Link
+          className="infolink"
+          to={`/people/info/${mv.id}`}
+          key={mv.credit_id}
+        >
+          <div key={mv.credit_id} className="cast-element">
+            <img src={mv.profileimg} className="cast-img" alt={mv.title}></img>
+            <div className="cast-char">
+              <span className="cast-small"> charactor: </span>
+              {mv.character}
+            </div>
+            <div className="cast-name">
+              <span className="cast-small">Original: </span>
+              {mv.name}
+            </div>
+            <div className="cast-name">
+              <span className="cast-small">Total EP: </span>
+              {mv.total_ep}
+            </div>
           </div>
-          <div className="cast-name">
-            <span className="cast-small">Original: </span>
-            {mv.name}
-          </div>
-          <div className="cast-name">
-            <span className="cast-small">Total EP: </span>
-            {mv.total_ep}
-          </div>
-        </div>
+        </Link>
       ));
     }
   }
@@ -177,6 +219,62 @@ class TvInfo extends React.Component {
       );
     }
   }
+  renderEPdetails() {
+    if (!this.props.epdetails) {
+      return <div>Loading...</div>;
+    }
+    if (this.props.fullDetails.id !== Number(this.props.match.params.id))
+      return <div>fetching</div>;
+    else {
+      const mv = this.props.epdetails;
+      return (
+        <div>
+          <div className="ep-title">
+            <span>
+              {" "}
+              season {mv.season_number} || {mv.title}
+            </span>{" "}
+            <button className="btn-trailer" onClick={this.openModal2}>
+              <div className="ep-trailer">
+                <span>
+                  <svg className="ep-trailer-icon">
+                    <use xlinkHref={`${sprite}#icon-play2`}></use>
+                  </svg>
+                </span>
+                Watch Trailer
+              </div>
+            </button>
+          </div>
+
+          <div className="ep-relese">Relesed on | {mv.relese}</div>
+          <div className="ep-overview">{mv.overview}</div>
+          <div className="ep-epcontainer">
+            {mv.episodes?.map((el) => {
+              return (
+                <div className="ep-element">
+                  <div className="ep-element-count">{el.episode_number}</div>
+                  <img
+                    className="ep-element-img"
+                    src={mv.posterURL + el?.still_path}
+                    alt="still img"
+                  />
+                  <div className="ep-element-details">
+                    <div className="ep-element-details-name">{el?.name}</div>
+                    <div className="ep-element-details-relese">
+                      {el?.air_date}
+                    </div>
+                    <div className="ep-element-details-overview">
+                      {el?.overview}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+  }
   renderBody() {
     if (!this.props.fullDetails) return <div>Loading...</div>;
     if (this.props.fullDetails.id !== Number(this.props.match.params.id)) {
@@ -211,7 +309,7 @@ class TvInfo extends React.Component {
               className="info-stream-logo"
               alt={mv.networks[0].name}
             />
-            <button onClick={this.openModal}>
+            <button className="btn-trailer" onClick={this.openModal}>
               <div className="info-trailer">
                 <span>
                   <svg className="info-trailer-icon">
@@ -246,7 +344,7 @@ class TvInfo extends React.Component {
                   <use xlinkHref={`${sprite}#icon-twitter`}></use>
                 </svg>
               </a>
-              <div className="info-visite-msg">visit official TVshow pages</div>
+              <div className="info-visite-msg">visit official series pages</div>
             </div>
             <div className="info-genre">{this.renderGenre()}</div>
             <div className="info-money">
@@ -312,6 +410,7 @@ class TvInfo extends React.Component {
             </div>
           </div>
           <ListContainer title={"Season List "} list={this.SeasonList} />
+          <div className="ep-container">{this.renderEPdetails()}</div>
           <ListContainer title={"CAST"} list={this.castList} />
           <ListContainer title={"CREW"} list={this.crewList} />
           {this.props.recomended.length ? (
@@ -329,6 +428,14 @@ class TvInfo extends React.Component {
             isOpen={this.state.isOpen}
             videoId={this.props.videos[0]?.key}
             onClose={() => this.setState({ isOpen: false })}
+          />
+
+          <ModalVideo
+            channel="youtube"
+            autoplay
+            isOpen={this.state.isOpen2}
+            videoId={this.props.epvideo[0]?.key}
+            onClose={() => this.setState({ isOpen2: false })}
           />
         </div>
       );
@@ -362,6 +469,8 @@ const mapStateToProps = (state) => {
     recomended: state.recomendedTv,
     similar: state.similarTv,
     stream: state.tvstream,
+    epdetails: state.epdetails,
+    epvideo: state.epvideo,
   };
 };
 export default connect(mapStateToProps, {
@@ -373,4 +482,6 @@ export default connect(mapStateToProps, {
   fetchRecomendedTv,
   fetchSimilarTv,
   fetchTvFlatrate,
+  fetchTvEpDetails,
+  fetchEPVideos,
 })(TvInfo);

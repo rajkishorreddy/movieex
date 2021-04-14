@@ -101,3 +101,88 @@
 .ov-stream {
   display: flex;
 }
+.ep {
+  &-trailer {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    &-icon {
+      fill: rgba(255, 0, 0, 0.671);
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  &-container {
+    background: #111;
+    color: rgba(221, 221, 221, 0.651);
+    padding-left: 3rem;
+    padding-right: 3rem;
+    @media only screen and (max-width: 35em) {
+      padding-left: 1rem;
+    }
+  }
+  &-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+  }
+  &-relese {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  &-overview {
+    font-size: 1.6rem;
+  }
+  &-epcontainer {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &-element {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    // border: 2px solid #000;
+    @media only screen and (max-width: 35em) {
+      width: 100%;
+    }
+    padding: 1rem;
+    &-count {
+      align-self: flex-start;
+      font-size: 2rem;
+    }
+    &-img {
+      width: 20rem;
+      border-radius: 2rem;
+      @media only screen and (max-width: 30em) {
+        height: 15rem;
+      }
+    }
+    &-details {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.3rem;
+      &-name {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+      }
+      &-relese {
+        padding: 0.5rem;
+      }
+      &-overview {
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+.btn-trailer {
+  background: none;
+  border: none;
+  color: rgba(221, 221, 221, 0.63);
+  outline: none;
+  cursor: pointer;
+}
