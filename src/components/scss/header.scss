@@ -297,3 +297,29 @@
   background-size: cover;
   background-position: top;
 }
+.login-msg {
+  color: white;
+  background: #030;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 3rem;
+  &-btn {
+    outline: none;
+    border: none;
+    padding: 0.5rem;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    cursor: pointer;
+    border-radius: 1rem;
+  }
+}
+.dispnone {
+  display: none;
+  width: 0;
+  height: 0;
+}

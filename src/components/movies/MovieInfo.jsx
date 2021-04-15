@@ -231,7 +231,6 @@ class MovieInfo extends React.Component {
   renderBody() {
     if (!this.props.movieDetails) return <div>Loading...</div>;
     if (this.props.movieDetails.id !== Number(this.props.match.params.id)) {
-      console.log("int the body", this.props.match.params.id);
       return <div>fetching</div>;
     } else {
       const mv = this.props.movieDetails;

@@ -76,7 +76,7 @@ export const fetchMultiSearch = (name) => {
       firstAir: obj.first_air_date,
       profile: posterUrl + obj.profile_path,
     }));
-    console.log(modifiedData);
+  
     dispatch({ type: "SEARCHED_MULTI", payload: modifiedData });
   };
 };
@@ -181,7 +181,7 @@ export const fetchPeopleDetails = (id) => {
       placeOfBirth: data.place_of_birth,
       profile: posterUrl + data.profile_path,
     };
-    console.log(modData);
+   
     dispatch({ type: "FULL_PEOPLE", payload: modData });
   };
 };
@@ -475,7 +475,7 @@ export const fetchFullTvDetails = (movie_id) => {
       rating: data.vote_average,
       rating_count: data.vote_count,
     };
-    console.log(modData);
+   
 
     dispatch({ type: "FULL_TV", payload: modData });
   };
@@ -684,7 +684,7 @@ export const fetchTopRatedtvShows = () => {
         },
       }
     );
-    console.log(data);
+   
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
       id: obj.id,

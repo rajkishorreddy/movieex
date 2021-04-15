@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./scss/header.scss";
 import { Link } from "react-router-dom";
 import history from "../history";
@@ -14,7 +14,11 @@ import axios from "axios";
 const Header = (props) => {
   const [term, setTerm] = useState("");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  console.log(user);
+  const btnref = useRef(null);
+
+  const closebtnclick = () => {
+    btnref.current.classList.add("dispnone");
+  };
   const onSubmit = (e) => {
     e.preventDefault();
     history.push(`/multi/${term}`);
@@ -126,11 +130,16 @@ const Header = (props) => {
         <span className="joker-watchnow">Watch now on</span>
         <img className="joker-img" src={primeVideo} alt="prime video" />
       </div>
-      {/* <div className="bg-video">
-        <video className="bg-video__content" autoPlay muted loop>
-          <source src={bgheader} type="video/mp4" />
-        </video>
-      </div> */}
+      {!user ? (
+        <div ref={btnref} className="login-msg">
+          Please login !it takes just few seconds .
+          <span>
+            <button onClick={closebtnclick} className="login-msg-btn">
+              X
+            </button>
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };
