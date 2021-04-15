@@ -738,6 +738,7 @@ export const fetchTvShowsMostVoted = () => {
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
+      backimg: posterUrl + obj.backdrop_path,
     }));
     dispatch({ type: "TV_MOST_VOTED", payload: modifiedData });
   };

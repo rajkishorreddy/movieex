@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./scss/header.scss";
 import { Link } from "react-router-dom";
 import history from "../history";
-import bgheader from "../assets/bgheader.mp4";
+
 import logoName from "../assets/logoname.png";
 import jokerTitle from "../assets/jokerTitle.png";
 import primeVideo from "../assets/primeVideo.png";
@@ -126,11 +126,11 @@ const Header = (props) => {
         <span className="joker-watchnow">Watch now on</span>
         <img className="joker-img" src={primeVideo} alt="prime video" />
       </div>
-      <div className="bg-video">
+      {/* <div className="bg-video">
         <video className="bg-video__content" autoPlay muted loop>
           <source src={bgheader} type="video/mp4" />
         </video>
-      </div>
+      </div> */}
     </div>
   );
 };
