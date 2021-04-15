@@ -11,7 +11,9 @@ function MultiSearch(props) {
   const [dispmv, setDispmv] = useState(true);
   const [disptv, setDispTv] = useState(false);
   const [disppeople, setDispPeople] = useState(false);
-
+  const [mvs, setmvs] = useState(0);
+  const [tvs, settvs] = useState(0);
+  const [peps, setpeps] = useState(0);
   const onSubmit = (e) => {
     e.preventDefault();
     history.push(`/multi/${term}`);
@@ -22,7 +24,19 @@ function MultiSearch(props) {
     };
     fetchapi();
   }, []);
-
+  useEffect(() => {
+    let noofmvs = 0;
+    let nooftvs = 0;
+    let noofpep = 0;
+    props.res?.map((el) => {
+      if (el.media_type === "movie") noofmvs++;
+      else if (el.media_type === "tv") nooftvs++;
+      else noofpep++;
+    });
+    setmvs(noofmvs);
+    settvs(nooftvs);
+    setpeps(noofpep);
+  }, [props.res]);
   const renderMovies = () => {
     if (!props.res) return <div>!loading </div>;
     else {
@@ -107,13 +121,16 @@ function MultiSearch(props) {
     setDispTv(false);
     setDispPeople(true);
   };
+
   return (
     <div>
       <div className="mvhdr">
         <Link to="/">
           <img src={logo} alt="logo" className="mvhdr-logo" />
         </Link>
-      <div className="errmgg">if searched and not found plz check the spelling !</div>
+        <div className="errmgg">
+          if searched and not found plz check the spelling !
+        </div>
         <form onSubmit={onSubmit} className="mvhdr-form">
           <input
             className="mvhdr-input"
@@ -137,44 +154,48 @@ function MultiSearch(props) {
       </div>
       {dispmv ? (
         <>
-          <div className="multimv-title">Top searched movies </div>
-          <div className="multi-movie">{renderMovies()}</div>
+          <div className="multimv-title">Top searched movies {`(${mvs})`} </div>
+          {/* <div className="multi-movie">{renderMovies()}</div> */}
 
-          {/* <div className="multi-movie">
-            {renderMovies()[0] === undefined ? (
+          <div className="multi-movie">
+            {!mvs ? (
               <div className="nores">No results found</div>
             ) : (
               renderMovies()
             )}
-          </div> */}
+          </div>
         </>
       ) : null}
 
       {disptv ? (
         <>
-          <div className="multimv-title">Top searched TVshows</div>
-          <div className="multi-movie">{renderTvshows()}</div>
-          {/* <div className="multi-movie">
-            {renderTvshows()[0] === undefined ? (
+          <div className="multimv-title">
+            Top searched TVshows {`(${tvs})`}{" "}
+          </div>
+          {/* <div className="multi-movie">{renderTvshows()}</div> */}
+          <div className="multi-movie">
+            {!tvs ? (
               <div className="nores">No results found</div>
             ) : (
               renderTvshows()
             )}
-          </div>*/}
+          </div>
         </>
       ) : null}
       {disppeople ? (
         <>
-          <div className="multimv-title">Top searched People</div>
-          <div className="multi-movie">{renderpeople()}</div>
+          <div className="multimv-title">
+            Top searched People {`(${peps})`}{" "}
+          </div>
+          {/* <div className="multi-movie">{renderpeople()}</div> */}
 
-          {/* <div className="multi-movie">
-            {renderpeople()[0] === undefined ? (
+          <div className="multi-movie">
+            {!peps ? (
               <div className="nores">No results found</div>
             ) : (
               renderpeople()
             )}
-          </div> */}
+          </div>
         </>
       ) : null}
       <div className="movie-footer">

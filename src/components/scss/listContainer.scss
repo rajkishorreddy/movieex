@@ -34,6 +34,7 @@
     align-items: center;
     &:hover {
       transform: scale(1.1);
+      z-index: 15;
     }
   }
   &-img {

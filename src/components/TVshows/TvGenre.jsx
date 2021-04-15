@@ -47,7 +47,7 @@ class TvGenre extends React.Component {
     if (!this.props.genreMovies) return <div>Loading...</div>;
     return this.props.genreMovies.map((mv) => {
       return (
-        <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+        <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
           <div className="tprated-element">
             <img src={mv.poster} className="tprated-img" alt={mv.title}></img>
             <div className="tprated-rating">{mv.rating}</div>
@@ -93,9 +93,9 @@ class TvGenre extends React.Component {
         ) : (
           <div className="genre-test">
             <div className="genre-test-quote">
-              I would rather entertain and hope that people learned something
-              than educate people and hope they were entertained.{" "}
-              <span className="genre-test-quote-small">– Walt Disney</span>
+              “Happiness is ... watching just one more episode of your favourite
+              tv series till you can barely keep you eyes open.”{" "}
+              <span className="genre-test-quote-small">– Raja kishor</span>
             </div>
           </div>
         )}

@@ -3,6 +3,7 @@ import "../scss/movieSearch.scss";
 import { fetchSearchedMovies } from "../../actions";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 const MovieSearch = (props) => {
   const [term, setTerm] = useState("");
   const onSubmit = (e) => {
@@ -22,7 +23,8 @@ const MovieSearch = (props) => {
               src={mv.poster}
               className="tprated-img invalidImageSrc"
               alt={mv.title}
-            ></img>
+            />
+
             <div className="tprated-rating">{mv.rating}</div>
           </div>
         </Link>

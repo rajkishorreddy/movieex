@@ -10,27 +10,37 @@ const Footer = (props) => {
         <img className="footer-logo" src={m2} alt="footer logo" />
         <div className="footer-middle">
           <div className="footer-icon-nav">
-            <svg className="footer-icon-nav-item">
-              <use xlinkHref={`${sprite}#icon-mail4`}></use>
-            </svg>
+            <a href="mailto:rajakishorbeeravalli@gmail.com">
+              <svg className="footer-icon-nav-item">
+                <use xlinkHref={`${sprite}#icon-mail4`}></use>
+              </svg>
+            </a>
+            <a href=" https://www.instagram.com/rajkishorreddy/">
+              <svg className="footer-icon-nav-item">
+                <use xlinkHref={`${sprite}#icon-instagram`}></use>
+              </svg>
+            </a>
+            <a href=" https://twitter.com/kishor1523">
+              <svg className="footer-icon-nav-item">
+                <use xlinkHref={`${sprite}#icon-twitter`}></use>
+              </svg>
+            </a>
             <svg className="footer-icon-nav-item">
               <use xlinkHref={`${sprite}#icon-facebook2`}></use>
             </svg>
-            <svg className="footer-icon-nav-item">
-              <use xlinkHref={`${sprite}#icon-instagram`}></use>
-            </svg>
-            <svg className="footer-icon-nav-item">
+            <a href="https://github.com/rajkishorreddy">
+              <svg className="footer-icon-nav-item">
+                <use xlinkHref={`${sprite}#icon-github`}></use>
+              </svg>
+            </a>
+            {/* <svg className="footer-icon-nav-item">
               <use xlinkHref={`${sprite}#icon-telegram`}></use>
-            </svg>
-            <svg className="footer-icon-nav-item">
-              <use xlinkHref={`${sprite}#icon-twitter`}></use>
-            </svg>
-            <svg className="footer-icon-nav-item">
-              <use xlinkHref={`${sprite}#icon-github`}></use>
-            </svg>
+            </svg> */}
           </div>
           <div className="footer-creator">CreatedBy</div>
-          <div className="footer-creator-name">Raja kishor Reddy</div>
+          <div className="footer-creator-name">
+            <span>&copy;</span>Raja kishor Reddy
+          </div>
         </div>
         <div className="footer-right">
           <div className="footer-nav">

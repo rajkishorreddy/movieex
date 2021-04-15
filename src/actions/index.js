@@ -128,7 +128,7 @@ export const fetchPeopleTvList = (id) => {
       character: obj.character,
       rating: obj.vote_average,
       relese: obj.first_air_date,
-      poster: posterUrl + obj.poster_path,
+      poster: obj.poster_path ? posterUrl + obj.poster_path : null,
     }));
 
     dispatch({ type: "PEOPLE_TV", payload: modifiedData });
@@ -152,7 +152,7 @@ export const fetchPeopleMovieList = (id) => {
       character: obj.character,
       rating: obj.vote_average,
       relese: obj.release_date,
-      poster: posterUrl + obj.poster_path,
+      poster: obj.poster_path ? posterUrl + obj.poster_path : null,
     }));
     dispatch({ type: "PEOPLE_MOVIE", payload: modifiedData });
   };
@@ -372,7 +372,7 @@ export const fetchTvCast = (id) => {
       id: el.id,
       credit_id: el.roles[0].credit_id,
       name: el.name,
-      profileimg: posterUrl + el.profile_path,
+      profileimg: el.profile_path ? posterUrl + el.profile_path : null,
       total_ep: el.total_episode_count,
     }));
 
@@ -396,7 +396,7 @@ export const fetchTvCrew = (id) => {
       id: el.id,
       name: el.name,
       credit_id: el.jobs[0].credit_id,
-      profileimg: posterUrl + el.profile_path,
+      profileimg: el.profile_path ? posterUrl + el.profile_path : null,
     }));
 
     dispatch({ type: "TV_CREW", payload: modData });
@@ -495,17 +495,12 @@ export const fetchTvShowsByGenre = (genreID, page) => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
+
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "GENRE_TV", payload: modifiedData });
   };
@@ -524,17 +519,11 @@ export const fetchTrendingTvshows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "TRENDING_TV", payload: modifiedData });
   };
@@ -553,17 +542,11 @@ export const fetchSearchedTvshows = (mvname) => {
 
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "SEARCHED_TV", payload: modifiedData });
   };
@@ -583,17 +566,11 @@ export const fetchHboTvShows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "HBO_TV", payload: modifiedData });
   };
@@ -613,17 +590,12 @@ export const fetchHboMaxTvShows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
+
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "HBOMAX_TV", payload: modifiedData });
   };
@@ -643,17 +615,11 @@ export const fetchHotstarTvShows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "HOTSTAR_TV", payload: modifiedData });
   };
@@ -673,17 +639,11 @@ export const fetchAmazonTvShows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "AMAZON_TV", payload: modifiedData });
   };
@@ -703,17 +663,11 @@ export const fetchNetflixTvShows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "NETFLIX_TV", payload: modifiedData });
   };
@@ -733,17 +687,11 @@ export const fetchTopRatedtvShows = () => {
     console.log(data);
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "TV_TOPRATED", payload: modifiedData });
   };
@@ -762,17 +710,11 @@ export const fetchPopularTvShows = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "POPULAR_TV", payload: modifiedData });
   };
@@ -791,17 +733,11 @@ export const fetchTvShowsMostVoted = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.name,
-      origin_country: obj.origin_country,
-      original_language: obj.original_language,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.first_air_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "TV_MOST_VOTED", payload: modifiedData });
   };
@@ -840,16 +776,11 @@ export const fetchRecomendedMovies = (ID) => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "RECOMENDED_MOVIE", payload: modifiedData });
   };
@@ -867,16 +798,11 @@ export const fetchSimilarMovies = (ID) => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "SIMILAR_MOVIE", payload: modifiedData });
   };
@@ -1002,7 +928,7 @@ export const fetchMovieCrew = (id) => {
       id: el.id,
       name: el.name,
       credit_id: el.credit_id,
-      profileimg: posterUrl + el.profile_path,
+      profileimg: el.profile_path ? posterUrl + el.profile_path : null,
     }));
 
     dispatch({ type: "MOVIE_CREW", payload: modData });
@@ -1038,16 +964,11 @@ export const fetchSearchedMovies = (mvname) => {
 
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
-      poster: posterUrl + obj.poster_path,
+      poster: obj.poster_path ? posterUrl + obj.poster_path : null,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "SEARCHED_MOVIE", payload: modifiedData });
   };
@@ -1067,16 +988,11 @@ export const fetchMoviesByGenre = (genreID, page) => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "GENRE_MOVIE", payload: modifiedData });
   };
@@ -1092,16 +1008,11 @@ export const fetchTrendingMovies = () => {
     });
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "TRENDING_MOVIE", payload: modifiedData });
   };
@@ -1159,16 +1070,11 @@ export const fetchBoxOfficeMovies = () => {
     );
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "BOXOFFICE_MOVIE", payload: modifiedData });
   };
@@ -1185,16 +1091,11 @@ export const fetchUpcommingMovies = () => {
 
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "UPCOMMING_MOVIE", payload: modifiedData });
   };
@@ -1210,16 +1111,11 @@ export const fetchPopularMovies = () => {
     });
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "POPULAR_MOVIE", payload: modifiedData });
   };
@@ -1235,16 +1131,12 @@ export const fetchNowPlayingMovies = () => {
     });
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
       backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
       release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "NOW_PLAYING_MOVIE", payload: modifiedData });
   };
@@ -1260,16 +1152,10 @@ export const fetchTopRatedMovies = () => {
     });
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
-      adult: obj.adult,
-      backimg: posterUrl + obj.backdrop_path,
-      genre_ids: obj.genre_ids,
       id: obj.id,
       title: obj.title,
-      overview: obj.overview,
       poster: posterUrl + obj.poster_path,
-      release: obj.release_date,
       rating: obj.vote_average,
-      rating_count: obj.vote_count,
     }));
     dispatch({ type: "TOP_RATED_MOVIE", payload: modifiedData });
   };

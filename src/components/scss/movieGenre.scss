@@ -67,6 +67,7 @@
       padding: 2rem 2rem 0 0.5rem;
       transition: all 0.5s;
       &-item {
+        cursor: pointer;
         fill: white;
         height: 4rem;
         width: 4rem;
@@ -87,6 +88,7 @@
       padding: 2rem 2rem 0 2rem;
       transition: all 0.5s;
       &-item {
+        cursor: pointer;
         fill: white;
         height: 4rem;
         width: 4rem;

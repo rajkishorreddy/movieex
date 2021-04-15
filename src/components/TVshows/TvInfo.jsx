@@ -381,16 +381,18 @@ class TvInfo extends React.Component {
             <div className="info-createdby-title">Created by</div>
             <div className="info-createdby">
               {mv.created_by.map((el) => (
-                <div className="info-createdby-el" key={el.credit_id}>
-                  <img
-                    src={
-                      "https://image.tmdb.org/t/p/original/" + el.profile_path
-                    }
-                    alt={el.name}
-                    className="info-createdby-img"
-                  />
-                  <div className="info-createdby-name">{el.name} </div>
-                </div>
+                <Link to={`/people/info/${el.id}`} className="infolink">
+                  <div className="info-createdby-el" key={el.credit_id}>
+                    <img
+                      src={
+                        "https://image.tmdb.org/t/p/original/" + el.profile_path
+                      }
+                      alt={el.name}
+                      className="info-createdby-img"
+                    />
+                    <div className="info-createdby-name">{el.name} </div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -451,9 +453,10 @@ class TvInfo extends React.Component {
     return (
       <React.Fragment>
         {this.renderBody()}
-        <div className="quote">
-          “It's not what a movie is about, it's how it is about it.”{" "}
-          <span className="quote-small">― Roger Ebert</span>
+        <div className="quote quote-smallsize">
+          “I would rather entertain and hope that people learned something than
+          educate people and hope they were entertained.”{" "}
+          <span className="quote-small">– Walt Disney</span>
         </div>
       </React.Fragment>
     );
