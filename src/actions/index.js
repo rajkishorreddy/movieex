@@ -2,6 +2,8 @@ import axios from "axios";
 
 const url = "https://api.themoviedb.org/3";
 const apiKey = "2afbb0d04ed94c81cd8858e0087a74fe";
+// please try to get your own key mate from tmdb ...thats easy and free
+
 const nowPlayingMovieUrl = `${url}/movie/now_playing`;
 const topRatedMoviesUrl = `${url}/movie/top_rated`;
 const popularMoviesUrl = `${url}/movie/popular`;
@@ -76,7 +78,7 @@ export const fetchMultiSearch = (name) => {
       firstAir: obj.first_air_date,
       profile: posterUrl + obj.profile_path,
     }));
-  
+
     dispatch({ type: "SEARCHED_MULTI", payload: modifiedData });
   };
 };
@@ -181,7 +183,7 @@ export const fetchPeopleDetails = (id) => {
       placeOfBirth: data.place_of_birth,
       profile: posterUrl + data.profile_path,
     };
-   
+
     dispatch({ type: "FULL_PEOPLE", payload: modData });
   };
 };
@@ -475,7 +477,6 @@ export const fetchFullTvDetails = (movie_id) => {
       rating: data.vote_average,
       rating_count: data.vote_count,
     };
-   
 
     dispatch({ type: "FULL_TV", payload: modData });
   };
@@ -684,7 +685,7 @@ export const fetchTopRatedtvShows = () => {
         },
       }
     );
-   
+
     const posterUrl = "https://image.tmdb.org/t/p/original/";
     const modifiedData = data["results"].map((obj) => ({
       id: obj.id,
