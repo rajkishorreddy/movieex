@@ -26,7 +26,7 @@ class MovieBody extends React.Component {
       // await this.props.fetchTrendingPeople();
     };
     fetchapi();
-  }
+  }   
   renderSlider() {
     if (!this.props.nowPlayingMovies) {
       return <div>Loading...</div>;
@@ -146,7 +146,7 @@ class MovieBody extends React.Component {
             infiniteLoop={true}
             autoPlay={true}
             showThumbs={false}
-            interval={2000}
+            interval={5000}
             showStatus={false}
             stopOnHover={false}
           >

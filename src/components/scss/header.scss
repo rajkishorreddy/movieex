@@ -98,7 +98,7 @@
     &-input {
       padding: 1rem;
       width: 100%;
-      border-radius: 2rem;
+      border-radius: .3rem;
       outline: none;
       border: none;
       color: black;
@@ -136,17 +136,17 @@
       &-3 {
         background-color: #030;
         padding: 0.5rem 1rem 0.5rem 1rem;
-        border-radius: 2rem;
+        border-radius: .3rem;
         @media only screen and (max-width: 30em) {
           display: none;
         }
       }
       &-1,
       &-2 {
-        margin-right: 1rem;
+        margin-right: 2.5rem;
         background-color: #030;
         padding: 0.5rem 1rem 0.5rem 1rem;
-        border-radius: 2rem;
+        border-radius: .3rem;
         @media only screen and (max-width: 30em) {
           display: none;
         }
@@ -155,7 +155,7 @@
   }
 }
 .header-nav-item:hover {
-  border-bottom: 2px solid green;
+  border-bottom: 2px solid rgb(0, 80, 0);
 }
 .welcome {
   position: absolute;
@@ -209,15 +209,16 @@
     font-size: 3rem;
     margin-right: 2rem;
     color: green;
+    cursor: default;
   }
   &-btn {
     color: black;
     text-decoration: none;
     font-weight: 700;
     font-size: 1.3rem;
-    padding: 1rem 1.5rem 1rem 1.5rem;
+    padding: .7rem 1rem .7rem 1rem;
     margin-right: 2rem;
-    border-radius: 5rem;
+    border-radius: .3rem;
     background: rgba(255, 255, 255, 0.719);
     box-shadow: 3px 4px 9px 0px rgba(255, 255, 255, 0.397);
     &:hover {

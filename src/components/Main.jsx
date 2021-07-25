@@ -29,7 +29,8 @@ class Main extends React.Component {
     } else {
       return this.props.nowPlayingMovies.slice(0, 5).map((mv) => {
         return (
-          <div className="mvt-ocard" key={mv.id}>
+          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="mvt-ocard" >
             {/* <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div> */}
             <div className="mvt-icard">
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
@@ -43,6 +44,7 @@ class Main extends React.Component {
             <div className="mvt-ocard-rating">{mv.rating}</div>
             <div className="mvt-ocard-relese">{mv.release}</div>
           </div>
+          </Link>
         );
       });
     }
@@ -53,7 +55,8 @@ class Main extends React.Component {
     } else {
       return this.props.topRatedMovies.slice(0, 5).map((mv) => {
         return (
-          <div className="mvt-ocard" key={mv.id}>
+          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <div className="mvt-ocard" >
             {/* <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div> */}
             <div className="mvt-icard">
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
@@ -66,7 +69,7 @@ class Main extends React.Component {
             </div> */}
             <div className="mvt-ocard-rating">{mv.rating}</div>
             <div className="mvt-ocard-relese">{mv.release}</div>
-          </div>
+          </div></Link>
         );
       });
     }
@@ -77,12 +80,14 @@ class Main extends React.Component {
     } else {
       return this.props.trendingPeople.slice(0, 5).map((mv) => {
         return (
+          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
           <div className="mvt-ocard" key={mv.id}>
             <div className="mvt-icard">
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
             </div>
             <div className="mvt-ocard-title">{mv.name}</div>
           </div>
+          </Link>
         );
       });
     }
@@ -93,6 +98,7 @@ class Main extends React.Component {
     } else {
       return this.props.PopularTv.slice(0, 5).map((mv) => {
         return (
+          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
           <div className="mvt-ocard" key={mv.id}>
             {/* <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div> */}
             <div className="mvt-icard">
@@ -106,7 +112,7 @@ class Main extends React.Component {
             </div> */}
             <div className="mvt-ocard-rating">{mv.rating}</div>
             <div className="mvt-ocard-relese">{mv.release}</div>
-          </div>
+          </div></Link>
         );
       });
     }

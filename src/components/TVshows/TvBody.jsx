@@ -180,7 +180,7 @@ class TvBody extends React.Component {
             infiniteLoop={true}
             autoPlay={true}
             showThumbs={false}
-            interval={2000}
+            interval={5000}
             showStatus={false}
             stopOnHover={false}
           >

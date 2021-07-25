@@ -103,7 +103,7 @@ const Header = (props) => {
           }}
           className="header-form-input"
           type="text"
-          placeholder="search for a movie,TVshow or people..."
+          placeholder="search for a movie,TVshow or a person..."
         ></input>
       </form>
       <p className="millions">
@@ -130,7 +130,7 @@ const Header = (props) => {
         <span className="joker-watchnow">Watch now on</span>
         <img className="joker-img" src={primeVideo} alt="prime video" />
       </div>
-      {!user ? (
+      {/* {!user ? (
         <div ref={btnref} className="login-msg">
           Please login !it takes just few seconds .
           <span>
@@ -139,7 +139,7 @@ const Header = (props) => {
             </button>
           </span>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };
