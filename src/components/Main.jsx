@@ -80,7 +80,7 @@ class Main extends React.Component {
     } else {
       return this.props.trendingPeople.slice(0, 5).map((mv) => {
         return (
-          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <Link className="infolink" to={`/people/info/${mv.id}`} key={mv.id}>
           <div className="mvt-ocard" key={mv.id}>
             <div className="mvt-icard">
               <img src={mv.poster} alt="poster" className="mvt-icard-img"></img>
@@ -98,7 +98,7 @@ class Main extends React.Component {
     } else {
       return this.props.PopularTv.slice(0, 5).map((mv) => {
         return (
-          <Link className="infolink" to={`/movies/info/${mv.id}`} key={mv.id}>
+          <Link className="infolink" to={`/tvshows/info/${mv.id}`} key={mv.id}>
           <div className="mvt-ocard" key={mv.id}>
             {/* <div className="mvt-ocard-adult">{mv.adult ? "A" : "U/A"}</div> */}
             <div className="mvt-icard">
