@@ -6,11 +6,11 @@ import history from "../history";
 import logoName from "../assets/logoname.png";
 import jokerTitle from "../assets/jokerTitle.png";
 import primeVideo from "../assets/primeVideo.png";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import { setuseraction, logoutUserAction } from "../actions";
 import { connect } from "react-redux";
-import googleIcon from "../assets/googleIcon.png";
-import axios from "axios";
+// import googleIcon from "../assets/googleIcon.png";
+// import axios from "axios";
 const Header = (props) => {
   const [term, setTerm] = useState("");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -26,22 +26,22 @@ const Header = (props) => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [props.uuu]);
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
-    await props.setuseraction({ result, token });
-    axios({
-      method: "post",
-      url: "https://movieex.herokuapp.com/api/users/signup",
-      data: {
-        name: result.name,
-        email: result.email,
-      },
-    });
-  };
-  const googleFailure = (err) => {
-    console.log(err);
-  };
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   const token = res?.tokenId;
+  //   await props.setuseraction({ result, token });
+  //   axios({
+  //     method: "post",
+  //     url: "https://movieex.herokuapp.com/api/users/signup",
+  //     data: {
+  //       name: result.name,
+  //       email: result.email,
+  //     },
+  //   });
+  // };
+  // const googleFailure = (err) => {
+  //   console.log(err);
+  // };
   const logoutclick = () => {
     props.logoutUserAction();
     setUser(null);
@@ -63,7 +63,7 @@ const Header = (props) => {
         </nav>
         {!user ? (
           <div className="header-login">
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId="587037560217-tmcfd3alkf2in9ea376edaansgbqco6c.apps.googleusercontent.com"
               render={(renderProps) => (
                 <button
@@ -79,7 +79,8 @@ const Header = (props) => {
               onFailure={googleFailure}
               // buttonText="login"
               cookiePolicy="single_host_origin"
-            />
+            /> */}
+            <button class="login-btn">Login</button>
           </div>
         ) : (
           <div className="header-right">

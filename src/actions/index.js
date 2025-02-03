@@ -1022,7 +1022,7 @@ export const fetchTrendingMovies = () => {
 export const fetchFullMovieDetails = (movie_id) => {
   return async (dispatch) => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3//movie/${movie_id}`,
+      `https://api.themoviedb.org/3/movie/${movie_id}`,
       {
         params: {
           api_key: apiKey,
